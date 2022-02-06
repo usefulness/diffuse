@@ -4,9 +4,12 @@ on:
   pull_request:
   push:
     branches:
-      - '*'
-    tags:
-      - '*'
+      - master
+      - main
+      - trunk
+      - develop
+      - maine
+      - mane
 
 jobs:
   build:
@@ -20,17 +23,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Get version
-        id: get_version
-        if: startsWith(github.ref, 'refs/tags/')
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-
       - uses: gradle/wrapper-validation-action@v1
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - run: ./gradlew build -Pversion=${{ steps.get_version.outputs.version }}
+      - run: ./gradlew build
 
       - uses: actions/upload-artifact@v2
         with:
@@ -38,11 +36,38 @@ jobs:
           path: diffuse/build/libs/diffuse-*-binary.jar
           if-no-files-found: error
 
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
-        with:
-          files: diffuse/build/libs/diffuse-*-binary.jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: cp diffuse/build/libs/diffuse-unspecified-binary.jar diffuse-source-file
+        shell: bash
 
+      - uses: actions/cache@v2
+        name: Upload base
+        with:
+          path: diffuse-source-file
+          key: diffuse-${{ github.sha }}
+
+      - uses: peter-evans/find-comment@v1
+        id: find_comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Diffuse output
+
+      - uses: peter-evans/create-or-update-comment@v1
+        if: ${{ steps.diffuse.outputs.diff-raw != null || steps.find_comment.outputs.comment-id != null }}
+        with:
+          body: |
+            Diffuse output:
+
+            ### Jar size:
+            Jar size change: ${{ steps.diffuse.outputs.size-diff-comment_style_1 }}
+
+            ### Diffuse output:
+            ${{ steps.diffuse.outputs.diff-gh-comment-all-collapsed }}
+          edit-mode: replace
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: diffuse-output
+          path: ${{ steps.diffuse.outputs.diff-file }}

@@ -43,6 +43,7 @@ def fatJarProvider = tasks.register('fatJar', Jar) { task ->
     task.exclude 'META-INF/proguard/**'
     task.exclude 'META-INF/*.version'
     task.exclude '**/*.proto'
+    task.exclude '**/*.dex'
     task.exclude 'LICENSE'
     task.exclude 'NOTICE'
     task.exclude 'r8-version.properties'
@@ -64,7 +65,7 @@ def r8JarProvider = tasks.register('r8Jar', JavaExec) { task ->
   task.classpath(configurations.r8)
   task.mainClass.set('com.android.tools.r8.R8')
   task.args = [
-    '--release',
+    '--debug',
     '--classfile',
     '--output', r8File.toString(),
     '--pg-conf', 'src/main/rules.txt',

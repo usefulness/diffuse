@@ -1,12 +1,16 @@
 buildscript {
+  ext.protoVersion = "7.0.0-beta04-7396180"
+  ext.protobufJavaVersion = "3.10.0"
+  ext.guavaVersion = "28.1-jre"
   ext.deps = [
       'androidTools': [
           'dalvikDx': 'com.jakewharton.android.repackaged:dalvik-dx:9.0.0_r3',
           'binaryResources': 'com.android.tools.apkparser:binary-resources:27.2.2',
           'apkSigner': 'com.android.tools.build:apksig:4.2.2',
-          'bundleTool': 'com.android.tools.build:bundletool:1.4.0',
+          'bundleTool': 'com.android.tools.build:bundletool:1.8.2',
           // Keep this value in sync with bundletool's dependencies.
-          'aapt2Proto': 'com.android.tools.build:aapt2-proto:4.1.0-alpha01-6193524',
+          'aapt2Proto': "com.android.tools.build:aapt2-proto:${ext.protoVersion}",
+          'protobufJava': "com.google.protobuf:protobuf-java:${ext.protobufJavaVersion}",
       ],
       'clikt': 'com.github.ajalt.clikt:clikt:3.4.0',
       'junit': 'junit:junit:4.13.2',
@@ -20,7 +24,7 @@ buildscript {
 
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
-    classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.10.0'
+    classpath 'org.jetbrains.dokka:dokka-gradle-plugin:1.6.10'
     classpath 'org.jlleitschuh.gradle:ktlint-gradle:10.2.1'
     classpath 'com.vanniktech:gradle-maven-publish-plugin:0.9.0'
   }
@@ -59,6 +63,23 @@ subprojects {
     java {
       toolchain {
         languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_11.majorVersion))
+      }
+    }
+  }
+
+  configurations.configureEach {
+    resolutionStrategy.eachDependency {
+      if (requested.group == "com.android.tools.build" && requested.name == "aapt2-proto") {
+        useVersion(rootProject.ext.protoVersion)
+        because("we need to keep depenedencies in sync with bundletool")
+      }
+      if (requested.group == "com.google.protobuf" && requested.name == "protobuf-java") {
+        useVersion(rootProject.ext.protobufJavaVersion)
+        because("we need to keep depenedencies in sync with bundletool")
+      }
+      if (requested.group == "com.google.guava" && requested.name == "guava") {
+        useVersion(rootProject.ext.guavaVersion)
+        because("we need to keep depenedencies in sync with bundletool")
       }
     }
   }

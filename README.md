@@ -1,4 +1,4 @@
-Diffuse
+Diffuse 
 =======
 [![build](https://github.com/usefulness/diffuse/actions/workflows/after-merge.yaml/badge.svg)](https://github.com/usefulness/diffuse/actions/workflows/after-merge.yaml)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/usefulness/diffuse)
@@ -163,16 +163,8 @@ See more information about the subcommands and their options/arguments by runnin
 
 ## Install
 
-**Mac OS**
-
-```
-$ brew install JakeWharton/repo/diffuse
-```
-
-**Other**
-
 Download standalone JAR from
-[latest release](https://github.com/JakeWharton/diffuse/releases/latest).
+[latest release](https://github.com/usefulness/diffuse/releases/latest).
 On MacOS and Linux you can `chmod +x` and execute the `.jar` directly.
 On Windows use `java -jar`.
 

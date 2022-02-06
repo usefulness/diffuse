@@ -1,5 +1,7 @@
 Diffuse
 =======
+[![build](https://github.com/usefulness/diffuse/actions/workflows/after-merge.yaml/badge.svg)](https://github.com/usefulness/diffuse/actions/workflows/after-merge.yaml)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/usefulness/diffuse)
 
 Diffuse is a tool for diffing APKs, AABs, AARs, and JARs in a way that aims to provide both a
 high-level view of what changes along with important detailed output.

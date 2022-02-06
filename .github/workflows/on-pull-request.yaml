@@ -37,7 +37,7 @@ jobs:
           key: diffuse-${{ github.event.pull_request.base.sha }}
 
       - id: diffuse
-        uses: usefulness/diffuse-action@v1
+        uses: usefulness/diffuse-action@v0.6.0
         with:
           old-file-path: diffuse-source-file
           new-file-path: diffuse/build/libs/diffuse-unspecified-binary.jar
@@ -52,13 +52,11 @@ jobs:
         if: ${{ steps.diffuse.outputs.diff-raw != null || steps.find_comment.outputs.comment-id != null }}
         with:
           body: |
-            Diffuse output:
-
             ### Jar size:
             Jar size change: ${{ steps.diffuse.outputs.size-diff-comment_style_1 }}
 
             ### Diffuse output:
-            ${{ steps.diffuse.outputs.diff-gh-comment-all-collapsed }}
+            ${{ steps.diffuse.outputs.diff-gh-comment }}
           edit-mode: replace
           comment-id: ${{ steps.find_comment.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}

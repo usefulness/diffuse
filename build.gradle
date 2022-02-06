@@ -1,6 +1,6 @@
 buildscript {
   ext.protoVersion = "7.0.0-beta04-7396180"
-  ext.protobufJavaVersion = "3.10.0"
+  ext.protobufJavaVersion = "3.19.4"
   ext.guavaVersion = "28.1-jre"
   ext.deps = [
       'androidTools': [

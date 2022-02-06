@@ -13,6 +13,7 @@ dependencies {
   // TODO bundletool depends on aapt2-proto but with a runtime dependency rather than compile.
   //  https://github.com/google/bundletool/issues/177
   implementation deps.androidTools.aapt2Proto
+  implementation deps.androidTools.protobufJava
 
   testImplementation deps.junit
   testImplementation deps.truth

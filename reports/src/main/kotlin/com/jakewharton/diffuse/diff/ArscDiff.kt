@@ -11,10 +11,10 @@ internal class ArscDiff(
   val oldArsc: Arsc,
   val newArsc: Arsc
 ) {
-  val configsAdded = (newArsc.configs - oldArsc.configs).sorted()
-  val configsRemoved = (oldArsc.configs - newArsc.configs).sorted()
-  val entriesAdded = (newArsc.entries.values - oldArsc.entries.values).sorted()
-  val entriesRemoved = (oldArsc.entries.values - newArsc.entries.values).sorted()
+  val configsAdded = (newArsc.configs - oldArsc.configs.toSet()).sorted()
+  val configsRemoved = (oldArsc.configs - newArsc.configs.toSet()).sorted()
+  val entriesAdded = (newArsc.entries.values - oldArsc.entries.values.toSet()).sorted()
+  val entriesRemoved = (oldArsc.entries.values - newArsc.entries.values.toSet()).sorted()
 
   val changed = configsAdded.isNotEmpty() ||
     configsRemoved.isNotEmpty() ||

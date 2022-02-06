@@ -1,7 +1,7 @@
 name: build
 
 on:
-  pull_request: {}
+  pull_request:
   push:
     branches:
       - '*'
@@ -14,24 +14,30 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+
+      - uses: actions/setup-java@v2
         with:
-          java-version: 11
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Get version
+        id: get_version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
+
 
       - uses: gradle/wrapper-validation-action@v1
-      - run: ./gradlew build
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        
+      - run: ./gradlew build -Pversion=${{ steps.get_version.outputs.version }}
 
       - uses: actions/upload-artifact@v2
         with:
           name: diffuse-latest-binary.jar
           path: diffuse/build/libs/diffuse-*-binary.jar
           if-no-files-found: error
-
-      #- run: ./gradlew uploadArchives
-      #  if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'JakeWharton/diffuse' }}
-      #  env:
-      #    ORG_GRADLE_PROJECT_SONATYPE_NEXUS_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-      #    ORG_GRADLE_PROJECT_SONATYPE_NEXUS_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
 
       - name: Extract release notes
         id: release_notes
@@ -42,32 +48,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
-          body: ${{ steps.release_notes.outputs.release_notes }}
           files: diffuse/build/libs/diffuse-*-binary.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get version
-        id: get_version
-        if: startsWith(github.ref, 'refs/tags/')
-        run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
-
-      - name: Set SHA
-        id: shasum
-        if: startsWith(github.ref, 'refs/tags/')
-        run: echo ::set-output name=sha::"$(shasum -a 256 diffuse/build/libs/diffuse-*-binary.jar | awk '{printf $1}')"
-
-      - name: Bump Brew
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_HOMEBREW_TOKEN }}
-        run: |
-          git config --global user.email "41898282+github-actions@users.noreply.github.com"
-          git config --global user.name "github-actions"
-          # Update to ensure we have the latest version which supports arbitrary default branches.
-          brew update
-          brew tap JakeWharton/repo
-          brew bump-formula-pr -f --version=${{ steps.get_version.outputs.version }} --no-browse --no-audit \
-            --sha256=${{ steps.shasum.outputs.sha }} \
-            --url="https://github.com/JakeWharton/diffuse/releases/download/${{ steps.get_version.outputs.version }}/diffuse-${{ steps.get_version.outputs.version }}-binary.jar" \
-            JakeWharton/repo/diffuse

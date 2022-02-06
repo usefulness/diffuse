@@ -28,7 +28,7 @@ class Jar private constructor(
         val declaredMembers = classes.flatMap { it.declaredMembers }
         val referencedMembers = classes.flatMapTo(LinkedHashSet()) { it.referencedMembers }
         // Declared methods are likely to reference other declared members. Ensure all are removed.
-        referencedMembers -= declaredMembers
+        referencedMembers -= declaredMembers.toSet()
 
         return Jar(name, files, classes, declaredMembers.sorted(), referencedMembers.sorted())
       }

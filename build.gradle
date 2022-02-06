@@ -9,7 +9,7 @@ buildscript {
           'aapt2Proto': 'com.android.tools.build:aapt2-proto:4.1.0-alpha01-6193524',
       ],
       'clikt': 'com.github.ajalt.clikt:clikt:3.0.0-rc',
-      'junit': 'junit:junit:4.13',
+      'junit': 'junit:junit:4.13.2',
       'truth': 'com.google.truth:truth:1.0.1',
       'guava': 'com.google.guava:guava:28.1-jre',
       'okio': 'com.squareup.okio:okio:2.8.0',

@@ -6,7 +6,7 @@ buildscript {
           'apkSigner': 'com.android.tools.build:apksig:4.2.2',
           'bundleTool': 'com.android.tools.build:bundletool:1.2.0',
           // Keep this value in sync with bundletool's dependencies.
-          'aapt2Proto': 'com.android.tools.build:aapt2-proto:4.1.0-alpha01-6193524',
+          'aapt2Proto': 'com.android.tools.build:aapt2-proto:4.2.2-7147631',
       ],
       'clikt': 'com.github.ajalt.clikt:clikt:3.0.0-rc',
       'junit': 'junit:junit:4.13.2',

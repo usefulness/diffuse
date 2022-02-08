@@ -40,7 +40,7 @@ jobs:
         uses: usefulness/diffuse-action@v0.6.0
         with:
           old-file-path: diffuse-source-file
-          new-file-path: diffuse/build/libs/diffuse-unspecified-binary.jar
+          new-file-path: diffuse/build/libs/diffuse-unspecified-r8.jar
 
       - uses: peter-evans/find-comment@v1
         id: find_comment

@@ -43,5 +43,5 @@ jobs:
           path: diffuse-source-file
           key: diffuse-${{ github.sha }}
 
-      - run: cp diffuse/build/libs/diffuse-unspecified-binary.jar diffuse-source-file
+      - run: cp diffuse/build/libs/diffuse-unspecified-r8.jar diffuse-source-file
         shell: bash

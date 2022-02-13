@@ -37,7 +37,7 @@ jobs:
           key: diffuse-${{ github.event.pull_request.base.sha }}
 
       - id: diffuse
-        uses: usefulness/diffuse-action@v0.6.0
+        uses: usefulness/diffuse-action@v0.7.0
         with:
           old-file-path: diffuse-source-file
           new-file-path: diffuse/build/libs/diffuse-unspecified-r8.jar

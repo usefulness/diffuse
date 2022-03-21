@@ -37,7 +37,7 @@ jobs:
           path: diffuse/build/libs/diffuse-*-binary.jar
           if-no-files-found: error
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         name: Upload base
         with:
           path: diffuse-source-file

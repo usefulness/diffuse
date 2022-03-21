@@ -30,7 +30,7 @@ jobs:
 
       - run: ./gradlew build
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         name: Download base
         with:
           path: diffuse-source-file

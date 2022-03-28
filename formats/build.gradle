@@ -17,6 +17,7 @@ dependencies {
   implementation libs.aapt2Proto
   implementation libs.protobufJava
 
-  testImplementation libs.junit
+  testImplementation libs.junit.api
+  testRuntimeOnly libs.junit.engine
   testImplementation libs.truth
 }

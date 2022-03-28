@@ -14,7 +14,8 @@ dependencies {
 
   r8 libs.r8
 
-  testImplementation libs.junit
+  testImplementation libs.junit.api
+  testRuntimeOnly libs.junit.engine
   testImplementation libs.truth
 }
 

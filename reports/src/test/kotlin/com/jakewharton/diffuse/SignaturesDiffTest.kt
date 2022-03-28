@@ -5,7 +5,7 @@ import com.jakewharton.diffuse.diff.SignaturesDiff
 import com.jakewharton.diffuse.diff.toDetailReport
 import com.jakewharton.diffuse.format.Signatures
 import okio.ByteString.Companion.encodeUtf8
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class SignaturesDiffTest {
   private val signatureEmpty = Signatures(emptyList(), emptyList(), emptyList())

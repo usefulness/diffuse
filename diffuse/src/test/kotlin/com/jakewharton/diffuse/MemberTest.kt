@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import com.jakewharton.diffuse.format.Field
 import com.jakewharton.diffuse.format.Method
 import com.jakewharton.diffuse.format.TypeDescriptor
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class MemberTest {
   private val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")

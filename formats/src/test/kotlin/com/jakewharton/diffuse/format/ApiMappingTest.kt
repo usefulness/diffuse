@@ -5,7 +5,7 @@ import com.jakewharton.diffuse.io.Input.Companion.asInput
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertSame
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class ApiMappingTest {
   @Test fun commentsAndWhitespaceIgnored() {

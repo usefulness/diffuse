@@ -18,6 +18,9 @@ subprojects {
       }
     }
   }
+  tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+  }
 
   configurations.configureEach {
     resolutionStrategy.eachDependency {

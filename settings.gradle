@@ -1,4 +1,21 @@
+pluginManagement {
+  dependencyResolutionManagement {
+    repositories {
+      mavenCentral()
+      gradlePluginPortal()
+    }
+  }
+}
+dependencyResolutionManagement {
+  repositories {
+    google()
+    mavenCentral()
+  }
+}
+
 include ':diffuse'
 include ':formats'
 include ':io'
 include ':reports'
+
+rootProject.name = GROUP

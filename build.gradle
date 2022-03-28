@@ -7,7 +7,7 @@ buildscript {
           'dalvikDx': 'com.jakewharton.android.repackaged:dalvik-dx:9.0.0_r3',
           'binaryResources': 'com.android.tools.apkparser:binary-resources:30.1.2',
           'apkSigner': 'com.android.tools.build:apksig:7.1.2',
-          'bundleTool': 'com.android.tools.build:bundletool:1.8.2',
+          'bundleTool': 'com.android.tools.build:bundletool:1.9.0',
           // Keep this value in sync with bundletool's dependencies.
           'aapt2Proto': "com.android.tools.build:aapt2-proto:${ext.protoVersion}",
           'protobufJava': "com.google.protobuf:protobuf-java:${ext.protobufJavaVersion}",

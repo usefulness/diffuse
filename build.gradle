@@ -1,5 +1,5 @@
 buildscript {
-  ext.protoVersion = "7.0.0-beta04-7396180"
+  ext.protoVersion = "7.1.2-7984345"
   ext.protobufJavaVersion = "3.10.0"
   ext.guavaVersion = "28.1-jre"
   ext.deps = [

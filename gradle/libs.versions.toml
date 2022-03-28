@@ -1,7 +1,7 @@
 [versions]
 bundletool = "1.9.0"
 # Keep this values in sync with bundletool"s dependencies.
-aapt2Proto = "7.0.0-beta04-7396180"
+aapt2Proto = "7.1.2-7984345"
 protobufJava = "3.10.0"
 guava = "28.1-jre"
 

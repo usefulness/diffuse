@@ -17,5 +17,3 @@ include ':diffuse'
 include ':formats'
 include ':io'
 include ':reports'
-
-rootProject.name = GROUP

@@ -12,7 +12,7 @@ dependencies {
   implementation project(':reports')
   implementation libs.clikt
 
-  r8 'com.android.tools:r8:3.1.51'
+  r8 libs.r8
 
   testImplementation libs.junit
   testImplementation libs.truth

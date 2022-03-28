@@ -19,6 +19,7 @@ picnic = "0.6.0"
 kotlin = "1.6.10"
 kotlinter = "3.9.0"
 maven-publish = "0.19.0"
+r8 = "3.1.51"
 
 [libraries]
 dalvikDx = { module = "com.jakewharton.android.repackaged:dalvik-dx", version.ref = "dalvikdx" }
@@ -35,6 +36,7 @@ byteunits = { module = "com.jakewharton.byteunits:byteunits", version.ref = "byt
 asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
 diffUtils = { module = "io.github.java-diff-utils:java-diff-utils", version.ref = "javaDiffUtils" }
 picnic = { module = "com.jakewharton.picnic:picnic", version.ref = "picnic" }
+r8 = { module = "com.android.tools:r8", version.ref = "r8" }
 
 [plugins]
 jmailen-kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }

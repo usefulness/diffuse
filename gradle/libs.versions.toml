@@ -17,7 +17,7 @@ asm = "9.3"
 javaDiffUtils = "4.11"
 picnic = "0.6.0"
 kotlin = "1.6.20"
-kotlinter = "3.9.0"
+kotlinter = "3.10.0"
 maven-publish = "0.19.0"
 r8 = "3.1.51"
 

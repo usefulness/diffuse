@@ -6,9 +6,9 @@ import java.io.FileNotFoundException
 import java.nio.file.FileSystem
 import java.nio.file.Path
 import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
 import kotlin.io.path.exists
-import kotlin.io.path.inputStream
 import okio.ByteString
 import okio.utf8Size
 
@@ -45,12 +45,16 @@ interface Zip : Closeable {
 
   interface Entry {
     val path: String
+
     /** The uncompressed size of the entry contents */
     val uncompressedSize: Size
+
     /** The compressed size of the entry contents. */
     val compressedSize: Size
+
     /** The impact on the overall zip size. This is [compressedSize] plus metadata. */
     val zipSize: Size
+
     /** Returns true if the entry is compressed using any method other than 'store'. */
     val isCompressed: Boolean
 
@@ -59,13 +63,17 @@ interface Zip : Closeable {
 }
 
 private fun <T : Zip.Entry> ZipInputStream.mapEntries(
-  entryFactory: (name: String, size: Size, compressedSize: Size, zipSize: Size, isCompressed: Boolean) -> T
-): List<T> {
-  return entries().map { it.toZipEntry(entryFactory) }.toList()
-}
+  entryFactory: (name: String, size: Size, compressedSize: Size, zipSize: Size, isCompressed: Boolean) -> T,
+) = entries().map { it.toZipEntry(entryFactory) }.toList()
+
+private fun <T : Zip.Entry> ZipFile.mapEntries(
+  entryFactory: (name: String, size: Size, compressedSize: Size, zipSize: Size, isCompressed: Boolean) -> T,
+) = entries().asSequence()
+  .map { it.toZipEntry(entryFactory) }
+  .toList()
 
 private fun <T : Zip.Entry> ZipEntry.toZipEntry(
-  entryFactory: (name: String, size: Size, compressedSize: Size, zipSize: Size, isCompressed: Boolean) -> T
+  entryFactory: (name: String, size: Size, compressedSize: Size, zipSize: Size, isCompressed: Boolean) -> T,
 ): T {
   val isCompressed = method != ZipEntry.STORED
   val nameSize = name.utf8Size()
@@ -86,17 +94,15 @@ private fun <T : Zip.Entry> ZipEntry.toZipEntry(
 internal fun Path.toZip(): Zip {
   val fs = asZipFileSystem()
   val root = fs.rootDirectories.single()!!
-  val entries = inputStream().use {
-    it.asZip().mapEntries { name, size, compressedSize, zipSize, isCompressed ->
-      PathZip.Entry(root, name, size, compressedSize, zipSize, isCompressed)
-    }
+  val entries = ZipFile(toFile()).mapEntries { name, size, compressedSize, zipSize, isCompressed ->
+    PathZip.Entry(root, name, size, compressedSize, zipSize, isCompressed)
   }
   return PathZip(fs, entries)
 }
 
 internal class PathZip(
   fs: FileSystem,
-  override val entries: List<Zip.Entry>
+  override val entries: List<Zip.Entry>,
 ) : Zip, Closeable by fs {
   class Entry(
     private val root: Path,
@@ -104,7 +110,7 @@ internal class PathZip(
     override val uncompressedSize: Size,
     override val compressedSize: Size,
     override val zipSize: Size,
-    override val isCompressed: Boolean
+    override val isCompressed: Boolean,
   ) : Zip.Entry {
     override fun asInput(): Input {
       val child = root.resolve(path)
@@ -124,7 +130,7 @@ internal fun ByteString.toZip(): Zip {
 }
 
 internal class BytesZip(
-  override val entries: List<Zip.Entry>
+  override val entries: List<Zip.Entry>,
 ) : Zip {
   class Entry(
     private val bytes: ByteString,
@@ -132,7 +138,7 @@ internal class BytesZip(
     override val uncompressedSize: Size,
     override val compressedSize: Size,
     override val zipSize: Size,
-    override val isCompressed: Boolean
+    override val isCompressed: Boolean,
   ) : Zip.Entry {
     override fun asInput(): Input {
       val zis = bytes.asInputStream().asZip()

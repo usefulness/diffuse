@@ -42,10 +42,8 @@ class FunctionalTest {
     )
 
     val lines = output.readLines()
-    assertThat(lines)
-      .contains("  - androidx.recyclerview.widget.RecyclerView markItemDecorInsetsDirty():0: RecyclerView\$ItemAnimator")
-    assertThat(lines)
-      .contains("      dex │     1 MiB │     196 B │     -1 MiB │   2.2 MiB │      -2 B │   -2.2 MiB ")
+    assertThat(lines).contains("  - androidx.recyclerview.widget.RecyclerView markItemDecorInsetsDirty():0: RecyclerView\$ItemAnimator")
+    assertThat(lines[7]).isEqualTo("      dex │     1 MiB │   1.2 MiB │ +164.8 KiB │   2.2 MiB │   2.6 MiB │ +380.9 KiB ")
   }
 }
 

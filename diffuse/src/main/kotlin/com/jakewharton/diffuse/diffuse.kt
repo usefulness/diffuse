@@ -49,7 +49,7 @@ fun main(vararg args: String) {
   val defaultFs = FileSystems.getDefault()
   val systemOut = System.out
 
-  val version = NoOpCliktCommand::class.java.`package`.implementationVersion
+  val version = NoOpCliktCommand::class.java.`package`.implementationVersion.orEmpty()
   NoOpCliktCommand(name = "diffuse")
     .versionOption(version)
     .subcommands(

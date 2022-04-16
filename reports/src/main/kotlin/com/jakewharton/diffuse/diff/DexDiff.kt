@@ -13,11 +13,13 @@ import com.jakewharton.picnic.TextAlignment.MiddleRight
 import com.jakewharton.picnic.renderText
 
 internal class DexDiff(
-  val oldDexes: List<Dex>,
-  val oldMapping: ApiMapping,
-  val newDexes: List<Dex>,
-  val newMapping: ApiMapping
+  oldDexesRaw: List<Dex>,
+  oldMapping: ApiMapping,
+  newDexesRaw: List<Dex>,
+  newMapping: ApiMapping,
 ) {
+  val oldDexes = oldDexesRaw.map { it.withMapping(oldMapping) }
+  val newDexes = newDexesRaw.map { it.withMapping(newMapping) }
   val isMultidex = oldDexes.size > 1 || newDexes.size > 1
 
   val strings = componentDiff(oldDexes, newDexes) { it.strings }

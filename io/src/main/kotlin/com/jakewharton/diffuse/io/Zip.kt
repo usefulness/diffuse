@@ -9,6 +9,8 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipInputStream
 import kotlin.io.path.exists
+import kotlin.io.path.inputStream
+import kotlin.io.path.name
 import okio.ByteString
 import okio.utf8Size
 
@@ -94,8 +96,14 @@ private fun <T : Zip.Entry> ZipEntry.toZipEntry(
 internal fun Path.toZip(): Zip {
   val fs = asZipFileSystem()
   val root = fs.rootDirectories.single()!!
-  val entries = ZipFile(toFile()).mapEntries { name, size, compressedSize, zipSize, isCompressed ->
-    PathZip.Entry(root, name, size, compressedSize, zipSize, isCompressed)
+  val entries = try {
+    ZipFile(toFile()).mapEntries { name, size, compressedSize, zipSize, isCompressed ->
+      PathZip.Entry(root, name, size, compressedSize, zipSize, isCompressed)
+    }
+  } catch (ex: UnsupportedOperationException) {
+    inputStream().asZip().mapEntries { name, size, compressedSize, zipSize, isCompressed ->
+      PathZip.Entry(root, name, size, compressedSize, zipSize, isCompressed)
+    }
   }
   return PathZip(fs, entries)
 }

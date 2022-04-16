@@ -45,6 +45,21 @@ class FunctionalTest {
     assertThat(lines).contains("  - androidx.recyclerview.widget.RecyclerView markItemDecorInsetsDirty():0: RecyclerView\$ItemAnimator")
     assertThat(lines[7]).isEqualTo("      dex │     1 MiB │   1.2 MiB │ +164.8 KiB │   2.2 MiB │   2.6 MiB │ +380.9 KiB ")
   }
+
+  @Test
+  internal fun `diffuse diff on aar`() {
+    val output = anotherTempDir.resolve("diffuse-out")
+    val aarA = loadResource("lazythreeten/lazythreetenbp-release.aar")
+    val aarB = loadResource("lazythreeten/lazythreetenbp-release.aar")
+
+    main(
+      "diff",
+      "--aar", aarA, aarB,
+      "--text", output.path,
+    )
+
+    assertThat(output.readLines()).contains("    total │ 160.7 KiB │ 160.7 KiB │  0 B ")
+  }
 }
 
 private object Loader

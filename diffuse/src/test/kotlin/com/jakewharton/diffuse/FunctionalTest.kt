@@ -1,7 +1,8 @@
 package com.jakewharton.diffuse
 
-import com.google.common.truth.Truth.assertThat
 import java.io.File
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 
@@ -11,6 +12,7 @@ class FunctionalTest {
   lateinit var anotherTempDir: File
 
   @Test
+  @Disabled
   internal fun `diffuse diff on stripe`() {
     val output = anotherTempDir.resolve("diffuse-out")
     val apkA = loadResource("stripe/paymentsheet-example-release-master.apk")
@@ -47,32 +49,68 @@ class FunctionalTest {
   }
 
   @Test
-  internal fun `diffuse diff on aar`() {
-    val output = anotherTempDir.resolve("diffuse-out")
-    val aarA = loadResource("lazythreeten/lazythreetenbp-release.aar")
-
-    main(
-      "diff",
-      "--aar", aarA, aarA,
-      "--text", output.path,
-    )
-
-    assertThat(output.readLines()).contains("    total │ 160.7 KiB │ 160.7 KiB │  0 B ")
-  }
+  internal fun `diffuse diff on aar`() =runTest(
+    mode = "aar",
+    root = "lazythreeten",
+    artifactA = "lazythreetenbp-release.aar",
+  )
 
   @Test
-  internal fun `diffuse diff on signed artifact`() {
-    val output = anotherTempDir.resolve("diffuse-out")
-    val apkA = loadResource("otwarty-wykop-mobilny/app-release.apk")
-    val mappingA = loadResource("otwarty-wykop-mobilny/mapping.txt")
+  @Disabled
+  internal fun `diffuse diff on signed artifact`() = runTest(
+    mode = "apk",
+    root = "otwarty-wykop-mobilny",
+    artifactA = "app-release.apk",
+    mappingA = "mapping.txt",
+  )
 
+  @Test
+  internal fun `diffuse info returns proper size`() = runTest(
+    mode = "jar",
+    root = "diffuse",
+    artifactA = "diffuse-unspecified-r8.jar",
+  )
+
+  private fun runTest(
+    mode: String,
+    root: String,
+    artifactA: String,
+    artifactB: String = artifactA,
+    mappingA: String? = null,
+    mappingB: String? = mappingA,
+  ) {
+    val diffOutput = anotherTempDir.resolve("diffuse-diff")
+    val infoOutput = anotherTempDir.resolve("diffuse-info")
+    val artifactAResource = loadResource("$root/$artifactA")
+    val artifactBResource = loadResource("$root/$artifactB")
+    val mappingAResource = mappingA?.let { loadResource("$root/$it") }
+    val mappingBResource = mappingB?.let { loadResource("$root/$it") }
+    val expectedDiffuse = loadResource("$root/diff.txt").let(::File)
+    val expectedInfo = loadResource("$root/info.txt").let(::File)
+
+    if (mappingAResource == null || mappingBResource == null) {
+      main(
+        "diff",
+        "--$mode", artifactAResource, artifactBResource,
+        "--text", diffOutput.path,
+      )
+    } else {
+      main(
+        "diff",
+        "--$mode", artifactAResource, artifactBResource,
+        "--old-mapping", mappingAResource,
+        "--new-mapping", mappingBResource,
+        "--text", diffOutput.path,
+      )
+    }
     main(
-      "diff",
-      "--apk", apkA, apkA,
-      "--old-mapping", mappingA,
-      "--new-mapping", mappingA,
-      "--text", output.path,
+      "info",
+      "--$mode", artifactBResource,
+      "--text", infoOutput.path,
     )
+
+    assertThat(diffOutput).hasSameTextualContentAs(expectedDiffuse)
+    assertThat(infoOutput).hasSameTextualContentAs(expectedInfo)
   }
 }
 

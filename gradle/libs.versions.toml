@@ -10,7 +10,6 @@ apkparser = "30.1.3"
 apksign = "7.1.3"
 clikt = "3.4.1"
 junit = "5.8.2"
-truth = "1.1.3"
 okio = "3.0.0"
 byteunits = "0.9.1"
 asm = "9.3"
@@ -20,6 +19,7 @@ kotlin = "1.6.20"
 kotlinter = "3.10.0"
 maven-publish = "0.19.0"
 r8 = "3.3.28"
+assertJ = "3.22.0"
 
 [libraries]
 dalvikDx = { module = "com.jakewharton.android.repackaged:dalvik-dx", version.ref = "dalvikdx" }
@@ -31,7 +31,7 @@ protobufJava = { module = "com.google.protobuf:protobuf-java", version.ref = "pr
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-truth = { module = "com.google.truth:truth", version.ref = "truth" }
+assertJ = { module = "org.assertj:assertj-core", version.ref = "assertJ" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 byteunits = { module = "com.jakewharton.byteunits:byteunits", version.ref = "byteunits" }
 asm = { module = "org.ow2.asm:asm", version.ref = "asm" }

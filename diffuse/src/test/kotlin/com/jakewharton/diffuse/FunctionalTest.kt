@@ -50,15 +50,29 @@ class FunctionalTest {
   internal fun `diffuse diff on aar`() {
     val output = anotherTempDir.resolve("diffuse-out")
     val aarA = loadResource("lazythreeten/lazythreetenbp-release.aar")
-    val aarB = loadResource("lazythreeten/lazythreetenbp-release.aar")
 
     main(
       "diff",
-      "--aar", aarA, aarB,
+      "--aar", aarA, aarA,
       "--text", output.path,
     )
 
     assertThat(output.readLines()).contains("    total │ 160.7 KiB │ 160.7 KiB │  0 B ")
+  }
+
+  @Test
+  internal fun `diffuse diff on signed artifact`() {
+    val output = anotherTempDir.resolve("diffuse-out")
+    val apkA = loadResource("otwarty-wykop-mobilny/app-release.apk")
+    val mappingA = loadResource("otwarty-wykop-mobilny/mapping.txt")
+
+    main(
+      "diff",
+      "--apk", apkA, apkA,
+      "--old-mapping", mappingA,
+      "--new-mapping", mappingA,
+      "--text", output.path,
+    )
   }
 }
 

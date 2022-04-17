@@ -1,0 +1,17 @@
+OLD: diffuse-unspecified-r8.jar
+NEW: diffuse-unspecified-r8.jar
+
+       │        compressed        │        uncompressed        
+       ├─────────┬─────────┬──────┼──────────┬──────────┬──────
+ JAR   │ old     │ new     │ diff │ old      │ new      │ diff 
+───────┼─────────┼─────────┼──────┼──────────┼──────────┼──────
+ class │ 1.6 MiB │ 1.6 MiB │  0 B │  2.8 MiB │  2.8 MiB │  0 B 
+ other │   8 KiB │   8 KiB │  0 B │ 76.4 KiB │ 76.4 KiB │  0 B 
+───────┼─────────┼─────────┼──────┼──────────┼──────────┼──────
+ total │ 1.6 MiB │ 1.6 MiB │  0 B │  2.9 MiB │  2.9 MiB │  0 B 
+
+ CLASSES │ old  │ new  │ diff      
+─────────┼──────┼──────┼───────────
+ classes │ 1315 │ 1315 │ 0 (+0 -0) 
+ methods │ 7031 │ 7031 │ 0 (+0 -0) 
+  fields │ 3018 │ 3018 │ 0 (+0 -0) 

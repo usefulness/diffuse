@@ -1,0 +1,26 @@
+paymentsheet-example-release-pr.apk (signature: none)
+
+ APK      │ compressed │ uncompressed 
+──────────┼────────────┼──────────────
+      dex │   12.6 MiB │     42.5 MiB 
+     arsc │    1.6 MiB │      1.6 MiB 
+ manifest │    2.8 KiB │     12.1 KiB 
+      res │  759.9 KiB │      1.2 MiB 
+    asset │   78.4 KiB │    107.8 KiB 
+    other │   79.3 KiB │    154.6 KiB 
+──────────┼────────────┼──────────────
+    total │   15.1 MiB │     45.5 MiB 
+
+ DEX     │ raw    │ unique 
+─────────┼────────┼────────
+   files │      3 │        
+ strings │ 204811 │ 181406 
+   types │  35115 │  32736 
+ classes │  30225 │  30225 
+ methods │ 176455 │ 171028 
+  fields │ 118589 │ 117840 
+
+ ARSC    │ count 
+─────────┼───────
+ configs │   293 
+ entries │  5576 

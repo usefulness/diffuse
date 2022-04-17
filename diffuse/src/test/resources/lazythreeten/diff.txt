@@ -1,0 +1,16 @@
+OLD: lazythreetenbp-release.aar
+NEW: lazythreetenbp-release.aar
+
+ AAR      │ old       │ new       │ diff 
+──────────┼───────────┼───────────┼──────
+      jar │  19.9 KiB │  19.9 KiB │  0 B 
+ manifest │     249 B │     249 B │  0 B 
+    other │      96 B │      96 B │  0 B 
+──────────┼───────────┼───────────┼──────
+    total │ 160.7 KiB │ 160.7 KiB │  0 B 
+
+ JAR     │ old │ new │ diff      
+─────────┼─────┼─────┼───────────
+ classes │   6 │   6 │ 0 (+0 -0) 
+ methods │  65 │  65 │ 0 (+0 -0) 
+  fields │  10 │  10 │ 0 (+0 -0) 

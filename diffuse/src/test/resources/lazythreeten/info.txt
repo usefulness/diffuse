@@ -1,0 +1,15 @@
+lazythreetenbp-release.aar
+
+ AAR      │ compressed │ uncompressed 
+──────────┼────────────┼──────────────
+      jar │   18.5 KiB │     19.9 KiB 
+ manifest │      279 B │        249 B 
+    other │    2.5 KiB │         96 B 
+──────────┼────────────┼──────────────
+    total │  209.1 KiB │    160.7 KiB 
+
+ JAR     │ count 
+─────────┼───────
+ classes │     6 
+ methods │    65 
+  fields │    10 

@@ -4,7 +4,7 @@ import com.jakewharton.diffuse.format.ApiMapping
 
 internal fun ApiMapping.toSummaryString(): String {
   if (this === ApiMapping.EMPTY) {
-    return "not provided"
+    return "not providedn"
   }
   return buildString {
     append(types.toUnitString("types", 1 to "type"))

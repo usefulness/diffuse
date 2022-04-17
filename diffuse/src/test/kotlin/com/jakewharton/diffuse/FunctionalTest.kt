@@ -2,7 +2,6 @@ package com.jakewharton.diffuse
 
 import java.io.File
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 
@@ -12,20 +11,12 @@ class FunctionalTest {
   lateinit var anotherTempDir: File
 
   @Test
-  @Disabled
-  internal fun `diffuse diff on stripe`() {
-    val output = anotherTempDir.resolve("diffuse-out")
-    val apkA = loadResource("stripe/paymentsheet-example-release-master.apk")
-    val apkB = loadResource("stripe/paymentsheet-example-release-pr.apk")
-
-    main(
-      "diff",
-      "--apk", apkA, apkB,
-      "--text", output.path,
-    )
-
-    assertThat(output.readLines()).contains("  - com.stripe.android.model.PaymentMethod component17\$payments_core_release() → PaymentMethod\$USBankAccount")
-  }
+  internal fun `diffuse diff on stripe`() = runTest(
+    mode = "apk",
+    root = "stripe",
+    artifactA = "paymentsheet-example-release-master.apk",
+    artifactB = "paymentsheet-example-release-pr.apk",
+  )
 
   @Test
   internal fun `diffuse diff on obfuscated artifact`() {
@@ -49,14 +40,13 @@ class FunctionalTest {
   }
 
   @Test
-  internal fun `diffuse diff on aar`() =runTest(
+  internal fun `diffuse diff on aar`() = runTest(
     mode = "aar",
     root = "lazythreeten",
     artifactA = "lazythreetenbp-release.aar",
   )
 
   @Test
-  @Disabled
   internal fun `diffuse diff on signed artifact`() = runTest(
     mode = "apk",
     root = "otwarty-wykop-mobilny",
@@ -85,7 +75,7 @@ class FunctionalTest {
     val artifactBResource = loadResource("$root/$artifactB")
     val mappingAResource = mappingA?.let { loadResource("$root/$it") }
     val mappingBResource = mappingB?.let { loadResource("$root/$it") }
-    val expectedDiffuse = loadResource("$root/diff.txt").let(::File)
+    val expectedDiff = loadResource("$root/diff.txt").let(::File)
     val expectedInfo = loadResource("$root/info.txt").let(::File)
 
     if (mappingAResource == null || mappingBResource == null) {
@@ -109,7 +99,7 @@ class FunctionalTest {
       "--text", infoOutput.path,
     )
 
-    assertThat(diffOutput).hasSameTextualContentAs(expectedDiffuse)
+    assertThat(diffOutput).hasSameTextualContentAs(expectedDiff)
     assertThat(infoOutput).hasSameTextualContentAs(expectedInfo)
   }
 }

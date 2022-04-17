@@ -2,13 +2,12 @@ package com.jakewharton.diffuse.format
 
 import com.jakewharton.diffuse.format.ApiMapping.Companion.toApiMapping
 import com.jakewharton.diffuse.io.Input.Companion.asInput
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertSame
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ApiMappingTest {
-  @Test fun commentsAndWhitespaceIgnored() {
+  @Test
+  fun commentsAndWhitespaceIgnored() {
     val mapping =
       """
         # Leading comment
@@ -16,10 +15,11 @@ class ApiMappingTest {
         # Comment after empty line
       """.trimIndent().asInput("mapping.txt").toApiMapping()
 
-    assertNotNull(mapping)
+    assertThat(mapping).isNotNull()
   }
 
-  @Test fun typeMappingWithoutMembers() {
+  @Test
+  fun typeMappingWithoutMembers() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -28,15 +28,16 @@ class ApiMappingTest {
 
     val aaaDescriptor = TypeDescriptor("La/a/a;")
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
-    assertEquals(fooDescriptor, mapping[aaaDescriptor])
+    assertThat(fooDescriptor).isEqualTo(mapping[aaaDescriptor])
 
     // Ensure trailing type mapping is included.
     val aabDescriptor = TypeDescriptor("La/a/b;")
     val barDescriptor = TypeDescriptor("Lcom/example/Bar;")
-    assertEquals(barDescriptor, mapping[aabDescriptor])
+    assertThat(barDescriptor).isEqualTo(mapping[aabDescriptor])
   }
 
-  @Test fun fieldNameMapping() {
+  @Test
+  fun fieldNameMapping() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -49,10 +50,11 @@ class ApiMappingTest {
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
     val barField = Field(fooDescriptor, "bar", stringDescriptor)
 
-    assertEquals(barField, mapping[aField])
+    assertThat(barField).isEqualTo(mapping[aField])
   }
 
-  @Test fun fieldTypeMapping() {
+  @Test
+  fun fieldTypeMapping() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -68,10 +70,11 @@ class ApiMappingTest {
     val barDescriptor = TypeDescriptor("Lcom/example/Bar;")
     val barField = Field(fooDescriptor, "bar", barDescriptor)
 
-    assertEquals(barField, mapping[aField])
+    assertThat(barField).isEqualTo(mapping[aField])
   }
 
-  @Test fun fieldUnmappedName() {
+  @Test
+  fun fieldUnmappedName() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -83,28 +86,31 @@ class ApiMappingTest {
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
     val barField = Field(fooDescriptor, "bar", stringDescriptor)
 
-    assertEquals(barField, mapping[unmappedField])
+    assertThat(barField).isEqualTo(mapping[unmappedField])
   }
 
-  @Test fun fieldUnmappedDeclaringType() {
+  @Test
+  fun fieldUnmappedDeclaringType() {
     val mapping = "".asInput("mapping.txt").toApiMapping()
 
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
     val field = Field(fooDescriptor, "bar", stringDescriptor)
-    assertSame(field, mapping[field])
+    assertThat(field).isEqualTo(mapping[field])
   }
 
-  @Test fun fieldUnmappedArrayDeclaringType() {
+  @Test
+  fun fieldUnmappedArrayDeclaringType() {
     val mapping = "".asInput("mapping.txt").toApiMapping()
 
     val byteArrayLength = Field(byteDescriptor.asArray(1), "length", intDescriptor)
-    assertSame(byteArrayLength, mapping[byteArrayLength])
+    assertThat(byteArrayLength).isEqualTo(mapping[byteArrayLength])
 
     val boxedByteSize = Field(TypeDescriptor("Ljava/lang/Byte;"), "SIZE", intDescriptor)
-    assertSame(boxedByteSize, mapping[boxedByteSize])
+    assertThat(boxedByteSize).isEqualTo(mapping[boxedByteSize])
   }
 
-  @Test fun fieldPrimitiveTypes() {
+  @Test
+  fun fieldPrimitiveTypes() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -138,17 +144,18 @@ class ApiMappingTest {
     val longField = Field(fooDescriptor, "aLong", longDescriptor)
     val shortField = Field(fooDescriptor, "aShort", shortDescriptor)
 
-    assertEquals(booleanField, mapping[aField])
-    assertEquals(byteField, mapping[bField])
-    assertEquals(charField, mapping[cField])
-    assertEquals(doubleField, mapping[dField])
-    assertEquals(floatField, mapping[eField])
-    assertEquals(intField, mapping[fField])
-    assertEquals(longField, mapping[gField])
-    assertEquals(shortField, mapping[hField])
+    assertThat(booleanField).isEqualTo(mapping[aField])
+    assertThat(byteField).isEqualTo(mapping[bField])
+    assertThat(charField).isEqualTo(mapping[cField])
+    assertThat(doubleField).isEqualTo(mapping[dField])
+    assertThat(floatField).isEqualTo(mapping[eField])
+    assertThat(intField).isEqualTo(mapping[fField])
+    assertThat(longField).isEqualTo(mapping[gField])
+    assertThat(shortField).isEqualTo(mapping[hField])
   }
 
-  @Test fun fieldArray() {
+  @Test
+  fun fieldArray() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -170,12 +177,13 @@ class ApiMappingTest {
     val barsField = Field(fooDescriptor, "bars", barDescriptor.asArray(1))
     val stringsField = Field(fooDescriptor, "strings", stringDescriptor.asArray(6))
 
-    assertEquals(bytesField, mapping[aField])
-    assertEquals(barsField, mapping[bField])
-    assertEquals(stringsField, mapping[cField])
+    assertThat(bytesField).isEqualTo(mapping[aField])
+    assertThat(barsField).isEqualTo(mapping[bField])
+    assertThat(stringsField).isEqualTo(mapping[cField])
   }
 
-  @Test fun methodNameMapping() {
+  @Test
+  fun methodNameMapping() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -188,10 +196,11 @@ class ApiMappingTest {
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
     val barField = Method(fooDescriptor, "bar", emptyList(), voidDescriptor)
 
-    assertEquals(barField, mapping[aMethod])
+    assertThat(barField).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodReturnTypeMapping() {
+  @Test
+  fun methodReturnTypeMapping() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -207,10 +216,11 @@ class ApiMappingTest {
     val barDescriptor = TypeDescriptor("Lcom/example/Bar;")
     val barField = Method(fooDescriptor, "bar", emptyList(), barDescriptor)
 
-    assertEquals(barField, mapping[aMethod])
+    assertThat(barField).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodParameterTypeMapping() {
+  @Test
+  fun methodParameterTypeMapping() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -226,10 +236,11 @@ class ApiMappingTest {
     val barDescriptor = TypeDescriptor("Lcom/example/Bar;")
     val barField = Method(fooDescriptor, "bar", listOf(barDescriptor), voidDescriptor)
 
-    assertEquals(barField, mapping[aMethod])
+    assertThat(barField).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodWithSourceLineNumbers() {
+  @Test
+  fun methodWithSourceLineNumbers() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -242,10 +253,11 @@ class ApiMappingTest {
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
     val barField = Method(fooDescriptor, "bar", emptyList(), voidDescriptor)
 
-    assertEquals(barField, mapping[aMethod])
+    assertThat(barField).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodWithMappedLineNumbers() {
+  @Test
+  fun methodWithMappedLineNumbers() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -258,10 +270,11 @@ class ApiMappingTest {
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
     val barField = Method(fooDescriptor, "bar", emptyList(), voidDescriptor)
 
-    assertEquals(barField, mapping[aMethod])
+    assertThat(barField).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodPrimitiveReturnTypes() {
+  @Test
+  fun methodPrimitiveReturnTypes() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -295,17 +308,18 @@ class ApiMappingTest {
     val longMethod = Method(fooDescriptor, "aLong", emptyList(), longDescriptor)
     val shortMethod = Method(fooDescriptor, "aShort", emptyList(), shortDescriptor)
 
-    assertEquals(booleanMethod, mapping[aMethod])
-    assertEquals(byteMethod, mapping[bMethod])
-    assertEquals(charMethod, mapping[cMethod])
-    assertEquals(doubleMethod, mapping[dMethod])
-    assertEquals(floatMethod, mapping[eMethod])
-    assertEquals(intMethod, mapping[fMethod])
-    assertEquals(longMethod, mapping[gMethod])
-    assertEquals(shortMethod, mapping[hMethod])
+    assertThat(booleanMethod).isEqualTo(mapping[aMethod])
+    assertThat(byteMethod).isEqualTo(mapping[bMethod])
+    assertThat(charMethod).isEqualTo(mapping[cMethod])
+    assertThat(doubleMethod).isEqualTo(mapping[dMethod])
+    assertThat(floatMethod).isEqualTo(mapping[eMethod])
+    assertThat(intMethod).isEqualTo(mapping[fMethod])
+    assertThat(longMethod).isEqualTo(mapping[gMethod])
+    assertThat(shortMethod).isEqualTo(mapping[hMethod])
   }
 
-  @Test fun methodPrimitiveParameterTypes() {
+  @Test
+  fun methodPrimitiveParameterTypes() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -324,9 +338,9 @@ class ApiMappingTest {
         floatDescriptor,
         intDescriptor,
         longDescriptor,
-        shortDescriptor
+        shortDescriptor,
       ),
-      voidDescriptor
+      voidDescriptor,
     )
 
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
@@ -341,15 +355,16 @@ class ApiMappingTest {
         floatDescriptor,
         intDescriptor,
         longDescriptor,
-        shortDescriptor
+        shortDescriptor,
       ),
-      voidDescriptor
+      voidDescriptor,
     )
 
-    assertEquals(barMethod, mapping[aMethod])
+    assertThat(barMethod).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodArrayReturnTypes() {
+  @Test
+  fun methodArrayReturnTypes() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -371,12 +386,13 @@ class ApiMappingTest {
     val barsMethod = Method(fooDescriptor, "bars", emptyList(), barDescriptor.asArray(1))
     val stringsMethod = Method(fooDescriptor, "strings", emptyList(), stringDescriptor.asArray(6))
 
-    assertEquals(bytesMethod, mapping[aMethod])
-    assertEquals(barsMethod, mapping[bMethod])
-    assertEquals(stringsMethod, mapping[cMethod])
+    assertThat(bytesMethod).isEqualTo(mapping[aMethod])
+    assertThat(barsMethod).isEqualTo(mapping[bMethod])
+    assertThat(stringsMethod).isEqualTo(mapping[cMethod])
   }
 
-  @Test fun methodArrayParameterTypes() {
+  @Test
+  fun methodArrayParameterTypes() {
     val mapping =
       """
       com.example.Foo -> a.a.a:
@@ -390,7 +406,7 @@ class ApiMappingTest {
       aaaDescriptor,
       "a",
       listOf(byteDescriptor.asArray(1), aabDescriptor.asArray(1), stringDescriptor.asArray(6)),
-      voidDescriptor
+      voidDescriptor,
     )
 
     val fooDescriptor = TypeDescriptor("Lcom/example/Foo;")
@@ -399,42 +415,44 @@ class ApiMappingTest {
       fooDescriptor,
       "bar",
       listOf(byteDescriptor.asArray(1), barDescriptor.asArray(1), stringDescriptor.asArray(6)),
-      voidDescriptor
+      voidDescriptor,
     )
 
-    assertEquals(barMethod, mapping[aMethod])
+    assertThat(barMethod).isEqualTo(mapping[aMethod])
   }
 
-  @Test fun methodUnmappedSignatures() {
+  @Test
+  fun methodUnmappedSignatures() {
     val mapping = "".asInput("mapping.txt").toApiMapping()
 
     val boxedByteToString = Method(
       TypeDescriptor("Ljava/lang/Byte;"),
       "toString",
       emptyList(),
-      stringDescriptor
+      stringDescriptor,
     )
-    assertSame(boxedByteToString, mapping[boxedByteToString])
+    assertThat(boxedByteToString).isEqualTo(mapping[boxedByteToString])
   }
 
-  @Test fun methodUnmappedDeclaringType() {
+  @Test
+  fun methodUnmappedDeclaringType() {
     val mapping = "".asInput("mapping.txt").toApiMapping()
 
     val byteArrayClone = Method(
       byteDescriptor.asArray(1),
       "clone",
       emptyList(),
-      byteDescriptor.asArray(1)
+      byteDescriptor.asArray(1),
     )
-    assertSame(byteArrayClone, mapping[byteArrayClone])
+    assertThat(byteArrayClone).isEqualTo(mapping[byteArrayClone])
 
     val boxedByteToString = Method(
       TypeDescriptor("Ljava/lang/Byte;"),
       "toString",
       listOf(byteDescriptor),
-      stringDescriptor
+      stringDescriptor,
     )
-    assertSame(boxedByteToString, mapping[boxedByteToString])
+    assertThat(boxedByteToString).isEqualTo(mapping[boxedByteToString])
   }
 
   private val booleanDescriptor = TypeDescriptor("Z")

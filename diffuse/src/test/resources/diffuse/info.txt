@@ -1,0 +1,14 @@
+diffuse-unspecified-r8.jar
+
+ JAR   │ compressed │ uncompressed 
+───────┼────────────┼──────────────
+ class │    1.6 MiB │      2.8 MiB 
+ other │      8 KiB │     76.4 KiB 
+───────┼────────────┼──────────────
+ total │    1.6 MiB │      2.9 MiB 
+
+ CLASSES │ count 
+─────────┼───────
+ classes │  1315 
+ methods │  7031 
+  fields │  3018 

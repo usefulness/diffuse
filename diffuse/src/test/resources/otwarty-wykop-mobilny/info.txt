@@ -1,0 +1,26 @@
+app-release.apk (signature: V1, V2)
+
+ APK      │ compressed │ uncompressed 
+──────────┼────────────┼──────────────
+      dex │    4.3 MiB │     10.5 MiB 
+     arsc │    1.3 MiB │      1.3 MiB 
+ manifest │    6.3 KiB │     33.5 KiB 
+      res │  1,024 KiB │      1.4 MiB 
+    asset │   43.4 KiB │    108.2 KiB 
+    other │  192.5 KiB │    363.1 KiB 
+──────────┼────────────┼──────────────
+    total │    6.8 MiB │     13.7 MiB 
+
+ DEX     │ raw   │ unique 
+─────────┼───────┼────────
+   files │     3 │        
+ strings │ 58937 │  53837 
+   types │ 17789 │  15888 
+ classes │ 14135 │  14135 
+ methods │ 92288 │  88785 
+  fields │ 40111 │  39533 
+
+ ARSC    │ count 
+─────────┼───────
+ configs │   327 
+ entries │  6210 

@@ -2,7 +2,7 @@
 bundletool = "1.9.1"
 # Keep this values in sync with bundletool"s dependencies.
 aapt2Proto = "7.3.0-alpha07-8248216"
-protobufJava = "3.10.0"
+protobufJava = "3.20.1"
 guava = "28.1-jre"
 
 dalvikdx = "11.0.0_r3"

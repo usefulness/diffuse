@@ -17,3 +17,8 @@
 # Annotations for reflection.
 -keepattributes RuntimeVisible*Annotations,AnnotationDefault
 -keep class com.android.apksig.internal.** { *; }
+
+##############
+### APKSIG ###
+##############
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement

@@ -1,9 +1,9 @@
 [versions]
-bundletool = "1.9.1"
+bundletool = "1.10.0"
 # Keep this values in sync with bundletool"s dependencies.
 aapt2Proto = "7.3.0-alpha07-8248216"
 protobufJava = "3.10.0"
-guava = "28.1-jre"
+guava = "30.1-jre"
 
 dalvikdx = "11.0.0_r3"
 apkparser = "30.1.3"

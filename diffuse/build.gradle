@@ -50,6 +50,7 @@ def fatJarProvider = tasks.register('fatJar', Jar) { task ->
     task.exclude 'NOTICE'
     task.exclude 'r8-version.properties'
     task.exclude 'migrateToAndroidx/*'
+    task.exclude 'api_database/*'
   }
 }
 

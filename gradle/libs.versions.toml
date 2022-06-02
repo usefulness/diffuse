@@ -17,7 +17,6 @@ javaDiffUtils = "4.11"
 picnic = "0.6.0"
 kotlin = "1.6.21"
 kotlinter = "3.10.0"
-maven-publish = "0.19.0"
 r8 = "3.3.28"
 assertJ = "3.23.1"
 
@@ -43,4 +42,3 @@ r8 = { module = "com.android.tools:r8", version.ref = "r8" }
 jmailen-kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 kotlin-dokka = { id = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

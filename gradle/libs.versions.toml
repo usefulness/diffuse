@@ -17,7 +17,7 @@ javaDiffUtils = "4.11"
 picnic = "0.6.0"
 kotlin = "1.6.21"
 kotlinter = "3.10.0"
-maven-publish = "0.19.0"
+maven-publish = "0.20.0"
 r8 = "3.3.28"
 assertJ = "3.23.1"
 

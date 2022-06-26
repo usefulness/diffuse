@@ -29,8 +29,11 @@ abstract class BaseFunctionalTest {
     if (mappingAResource == null || mappingBResource == null) {
       main(
         "diff",
-        "--$mode", artifactAResource, artifactBResource,
-        "--text", diffOutput.path,
+        "--$mode",
+        artifactAResource,
+        artifactBResource,
+        "--text",
+        diffOutput.path,
       )
     } else {
       main(
@@ -43,8 +46,10 @@ abstract class BaseFunctionalTest {
     }
     main(
       "info",
-      "--$mode", artifactBResource,
-      "--text", infoOutput.path,
+      "--$mode",
+      artifactBResource,
+      "--text",
+      infoOutput.path,
     )
 
     assertThat(diffOutput).hasSameTextualContentAs(expectedDiff)

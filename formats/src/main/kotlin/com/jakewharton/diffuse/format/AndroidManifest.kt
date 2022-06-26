@@ -35,7 +35,7 @@ class AndroidManifest private constructor(
   val xml: String,
   val packageName: String,
   val versionName: String?,
-  val versionCode: Long?
+  val versionCode: Long?,
 ) {
   companion object {
     const val NAME = "AndroidManifest.xml"
@@ -142,7 +142,7 @@ class AndroidManifest private constructor(
       val emptyNodes = XPathFactory.newInstance().newXPath().evaluate(
         "//text()[normalize-space()='']",
         this,
-        XPathConstants.NODESET
+        XPathConstants.NODESET,
       ) as NodeList
       for (emptyNode in emptyNodes) {
         emptyNode.parentNode.removeChild(emptyNode)

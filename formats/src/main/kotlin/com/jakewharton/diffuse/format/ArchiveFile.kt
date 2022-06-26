@@ -9,7 +9,7 @@ data class ArchiveFile(
   val type: Type,
   val size: Size,
   val uncompressedSize: Size,
-  val isCompressed: Boolean
+  val isCompressed: Boolean,
 ) {
   enum class Type {
     Dex,

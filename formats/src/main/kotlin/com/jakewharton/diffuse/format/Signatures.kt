@@ -15,7 +15,7 @@ import okio.ByteString.Companion.toByteString
 data class Signatures(
   val v1: List<ByteString>,
   val v2: List<ByteString>,
-  val v3: List<ByteString>
+  val v3: List<ByteString>,
 ) {
   companion object {
     @JvmStatic
@@ -26,7 +26,7 @@ data class Signatures(
         return Signatures(
           result.v1SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
           result.v2SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
-          result.v3SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted()
+          result.v3SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
         )
       }
     }

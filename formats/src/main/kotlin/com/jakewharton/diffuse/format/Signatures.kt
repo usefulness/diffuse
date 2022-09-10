@@ -1,6 +1,8 @@
 package com.jakewharton.diffuse.format
 
 import com.android.apksig.ApkVerifier
+import com.android.apksig.ApkVerifier.Result
+import com.android.apksig.ApkVerifier.Result.V4SchemeSignerInfo
 import com.android.apksig.util.DataSource
 import com.android.apksig.util.DataSources
 import com.jakewharton.diffuse.io.Input
@@ -16,6 +18,7 @@ data class Signatures(
   val v1: List<ByteString>,
   val v2: List<ByteString>,
   val v3: List<ByteString>,
+  val v4: List<ByteString>,
 ) {
   companion object {
     @JvmStatic
@@ -27,6 +30,7 @@ data class Signatures(
           result.v1SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
           result.v2SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
           result.v3SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
+          result.v4SchemeSigners.map { it.certificate.encoded.toByteString().sha1() }.sorted(),
         )
       }
     }
@@ -50,5 +54,11 @@ data class Signatures(
         closeable?.close()
       }
     }
+
+    @Suppress("UNCHECKED_CAST")
+    private val Result.v4SchemeSigners: List<V4SchemeSignerInfo>
+      get() = this::class.java
+        .getDeclaredMethod("getV4SchemeSigners").apply { isAccessible = true }
+        .invoke(this) as List<V4SchemeSignerInfo>
   }
 }

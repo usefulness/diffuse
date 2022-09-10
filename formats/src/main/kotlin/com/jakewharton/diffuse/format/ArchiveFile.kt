@@ -29,7 +29,8 @@ data class ArchiveFile(
     Res,
     Asset,
     Native,
-    Other;
+    Other,
+    ;
 
     open val displayName get() = name.lowercase(Locale.US)
 

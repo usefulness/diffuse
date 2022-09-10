@@ -108,8 +108,11 @@ class AndroidManifest private constructor(
                 INT_DEC -> typedValue.data().toString()
                 INT_HEX -> "0x${typedValue.data()}"
                 REFERENCE -> {
-                  if (arsc != null) "@${arsc.entries[typedValue.data()]}"
-                  else typedValue.data().toString()
+                  if (arsc != null) {
+                    "@${arsc.entries[typedValue.data()]}"
+                  } else {
+                    typedValue.data().toString()
+                  }
                 }
                 NULL -> "null"
                 STRING -> attribute.rawValue()

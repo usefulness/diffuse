@@ -4,11 +4,11 @@ plugins {
 }
 
 subprojects {
-  plugins.withId(libs.plugins.kotlin.jvm.get().pluginId) {
+  pluginManager.withPlugin(libs.plugins.kotlin.jvm.get().pluginId) {
     pluginManager.apply(libs.plugins.jmailen.kotlinter.get().pluginId)
   }
 
-  plugins.withId("java") {
+  pluginManager.withPlugin("java") {
     tasks.withType(JavaCompile).configureEach {
       options.release.set(Integer.valueOf(JavaVersion.VERSION_1_8.majorVersion))
     }
@@ -44,8 +44,8 @@ subprojects {
       kotlinOptions {
         jvmTarget = "1.8"
         freeCompilerArgs = [
-            "-progressive",
-            '-opt-in=kotlin.contracts.ExperimentalContracts'
+          "-progressive",
+          '-opt-in=kotlin.contracts.ExperimentalContracts',
         ]
       }
     }

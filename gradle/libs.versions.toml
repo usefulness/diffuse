@@ -6,7 +6,7 @@ protobufJava = "3.19.2"
 guava = "31.0.1-jre"
 
 dalvikdx = "11.0.0_r3"
-apkparser = "30.3.1"
+apkparser = "30.4.0"
 apksign = "7.4.0"
 clikt = "3.5.1"
 junit = "5.9.2"

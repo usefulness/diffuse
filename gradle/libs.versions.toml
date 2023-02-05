@@ -16,7 +16,7 @@ asm = "9.4"
 javaDiffUtils = "4.12"
 picnic = "0.6.0"
 kotlin = "1.8.10"
-kotlinter = "3.13.0"
+ktlint-gradle-plugin = "0.2.0"
 r8 = "4.0.48"
 assertJ = "3.24.2"
 
@@ -39,6 +39,6 @@ picnic = { module = "com.jakewharton.picnic:picnic", version.ref = "picnic" }
 r8 = { module = "com.android.tools:r8", version.ref = "r8" }
 
 [plugins]
-jmailen-kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
+usefulness-ktlint-gradle = { id = "io.github.usefulness.ktlint-gradle-plugin", version.ref = "ktlint-gradle-plugin" }
 kotlin-dokka = { id = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

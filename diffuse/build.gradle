@@ -23,7 +23,7 @@ def fatJarProvider = tasks.register('fatJar', Jar) { task ->
   task.dependsOn(configurations.named('runtimeClasspath'))
   task.dependsOn(tasks.named('jar'))
 
-  task.classifier 'fat'
+  task.archiveClassifier.set('fat')
 
   task.manifest {
     attributes 'Main-Class': 'com.jakewharton.diffuse.Diffuse'
@@ -32,26 +32,26 @@ def fatJarProvider = tasks.register('fatJar', Jar) { task ->
 
   def sourceClasses = sourceSets.main.output.classesDirs
   task.inputs.files(sourceClasses)
-
-  task.doFirst {
-    task.from files(sourceClasses)
-    task.from configurations.runtimeClasspath.asFileTree.files.collect { zipTree(it) }
-
-    task.exclude '**/*.kotlin_metadata'
-    task.exclude '**/*.kotlin_module'
-    task.exclude '**/*.kotlin_builtins'
-    task.exclude '**/module-info.class'
-    task.exclude 'META-INF/maven/**'
-    task.exclude 'META-INF/proguard/**'
-    task.exclude 'META-INF/*.version'
-    task.exclude '**/*.proto'
-    task.exclude '**/*.dex'
-    task.exclude 'LICENSE'
-    task.exclude 'NOTICE'
-    task.exclude 'r8-version.properties'
-    task.exclude 'migrateToAndroidx/*'
-    task.exclude 'api_database/*'
+  task.from files(sourceClasses)
+  task.from configurations.named('runtimeClasspath').map {
+    it.asFileTree.files
+      .collect { it.isDirectory() ? it : zipTree(it) }
   }
+
+  task.exclude '**/*.kotlin_metadata'
+  task.exclude '**/*.kotlin_module'
+  task.exclude '**/*.kotlin_builtins'
+  task.exclude '**/module-info.class'
+  task.exclude 'META-INF/maven/**'
+  task.exclude 'META-INF/proguard/**'
+  task.exclude 'META-INF/*.version'
+  task.exclude '**/*.proto'
+  task.exclude '**/*.dex'
+  task.exclude 'LICENSE'
+  task.exclude 'NOTICE'
+  task.exclude 'r8-version.properties'
+  task.exclude 'migrateToAndroidx/*'
+  task.exclude 'api_database/*'
 }
 
 def r8File = new File("$buildDir/libs/$archivesBaseName-$version-r8.jar")

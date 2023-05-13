@@ -16,8 +16,7 @@ class Aab private constructor(
   val baseModule: Module,
   val featureModules: Map<String, Module>,
 ) : BinaryFormat {
-  // TODO remove toTypedArray call https://youtrack.jetbrains.com/issue/KT-12663
-  val modules get() = listOf(baseModule, *featureModules.values.toTypedArray())
+  val modules get() = listOf(baseModule) + featureModules.values
 
   class Module private constructor(
     val files: ArchiveFiles,
@@ -59,15 +58,16 @@ class Aab private constructor(
       }
     }
 
-    private val Zip.directories: List<String> get() {
-      return entries.mapNotNullTo(LinkedHashSet()) {
-        val slash = it.path.indexOf('/')
-        if (slash == -1) {
-          null
-        } else {
-          it.path.substring(0, slash)
+    private val Zip.directories: List<String>
+      get() = entries
+        .mapNotNullTo(LinkedHashSet()) {
+          val slash = it.path.indexOf('/')
+          if (slash == -1) {
+            null
+          } else {
+            it.path.substring(0, slash)
+          }
         }
-      }.sorted()
-    }
+        .sorted()
   }
 }

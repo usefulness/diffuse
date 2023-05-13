@@ -14,8 +14,7 @@ class Aar private constructor(
   val libs: List<Jar>,
 ) : BinaryFormat {
   /** The `classes.jar` and any additional jars from `libs/`. */
-  // TODO remove toTypedArray call https://youtrack.jetbrains.com/issue/KT-12663
-  val jars get() = listOf(classes, *libs.toTypedArray())
+  val jars get() = listOf(classes) + libs
 
   companion object {
     internal val libsJarRegex = Regex("libs/[^/]\\.jar")

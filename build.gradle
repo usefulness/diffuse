@@ -10,7 +10,7 @@ subprojects {
     pluginManager.apply(libs.plugins.usefulness.ktlint.gradle.get().pluginId)
 
     kotlin {
-      jvmToolchain(17)
+      jvmToolchain(20)
     }
     tasks.withType(KotlinCompile).configureEach {
       kotlinOptions {

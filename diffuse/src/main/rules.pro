@@ -18,11 +18,6 @@
 -keepattributes RuntimeVisible*Annotations,AnnotationDefault
 -keep class com.android.apksig.internal.** { *; }
 
-# Called by reflection
--keep class com.android.apksig.ApkVerifier$Result {
-    private java.util.List getV4SchemeSigners();
-}
-
 ##############
 ### APKSIG ###
 ##############

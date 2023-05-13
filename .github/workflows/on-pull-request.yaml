@@ -2,7 +2,7 @@ name: build
 
 on:
   pull_request:
-      
+
 jobs:
   cancel-previous-workflows:
     name: Cancel previous workflow runs
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '20'
 
       - uses: gradle/wrapper-validation-action@v1
 

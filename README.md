@@ -7,8 +7,8 @@ Diffuse
 
 ## Forked repository
 
-This is a fork of [JakeWharton/diffuse](https://github.com/JakeWharton/diffuse), maintained to work around lack of updated artifacts on the source repository - [more info](https://github.com/JakeWharton/diffuse/issues/111#issuecomment-1030749932)
-Binary artifacts, pinned to each [release](https://github.com/usefulness/diffuse/releases/latest) can be used when configuring [this Github Action](https://github.com/usefulness/diffuse-action)
+This is a fork of [JakeWharton/diffuse](https://github.com/JakeWharton/diffuse), maintained to work around lack of updated artifacts on the source repository - [more info](https://github.com/JakeWharton/diffuse/issues/111#issuecomment-1030749932)  
+Binary artifacts, pinned to each [release](https://github.com/usefulness/diffuse/releases/latest), can be also consumed by [this Github Action](https://github.com/usefulness/diffuse-action)
 
 Description
 -----

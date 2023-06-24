@@ -2,6 +2,7 @@ Diffuse
 =======
 [![build](https://github.com/usefulness/diffuse/actions/workflows/default.yaml/badge.svg)](https://github.com/usefulness/diffuse/actions/workflows/default.yaml)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/usefulness/diffuse)
+![Static Badge](https://img.shields.io/badge/java-11-blue)
 
 
 ## Forked repository

@@ -1,7 +1,16 @@
-Diffuse 
+Diffuse
 =======
-[![build](https://github.com/usefulness/diffuse/actions/workflows/after-merge.yaml/badge.svg)](https://github.com/usefulness/diffuse/actions/workflows/after-merge.yaml)
+[![build](https://github.com/usefulness/diffuse/actions/workflows/default.yaml/badge.svg)](https://github.com/usefulness/diffuse/actions/workflows/default.yaml)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/usefulness/diffuse)
+
+
+## Forked repository
+
+This is a fork of [JakeWharton/diffuse](https://github.com/JakeWharton/diffuse), maintained to work around lack of updated artifacts on the source repository - [more info](https://github.com/JakeWharton/diffuse/issues/111#issuecomment-1030749932)
+Binary artifacts, pinned to each [release](https://github.com/usefulness/diffuse/releases/latest) can be used when configuring [this Github Action](https://github.com/usefulness/diffuse-action)
+
+Description
+-----
 
 Diffuse is a tool for diffing APKs, AABs, AARs, and JARs in a way that aims to provide both a
 high-level view of what changes along with important detailed output.

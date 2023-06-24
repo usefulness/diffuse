@@ -40,5 +40,4 @@ r8 = { module = "com.android.tools:r8", version.ref = "r8" }
 
 [plugins]
 usefulness-ktlint-gradle = { id = "io.github.usefulness.ktlint-gradle-plugin", version.ref = "ktlint-gradle-plugin" }
-kotlin-dokka = { id = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

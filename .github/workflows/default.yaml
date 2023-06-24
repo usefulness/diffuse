@@ -2,47 +2,56 @@ name: build
 
 on:
   pull_request:
+  push:
+    branches:
+      - master
+      - main
+      - trunk
+      - develop
+      - maine
+      - mane
+  schedule:
+    - cron: '0 3 * * 1,4'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
-  cancel-previous-workflows:
-    name: Cancel previous workflow runs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: styfle/cancel-workflow-action@0.11.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '20'
+          java-version: 20
 
       - uses: gradle/wrapper-validation-action@v1
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+      - uses: gradle/gradle-build-action@v2
 
-      - run: ./gradlew build
+      - run: ./gradlew check --scan
+
+      - run: ./gradlew build --scan
 
       - uses: actions/cache@v3
+        if: github.event_name == 'pull_request'
         name: Download base
         with:
           path: diffuse-source-file
           key: diffuse-${{ github.event.pull_request.base.sha }}
 
       - id: diffuse
+        if: github.event_name == 'pull_request'
         uses: usefulness/diffuse-action@v0.9.0
         with:
           old-file-path: diffuse-source-file
           new-file-path: diffuse/build/libs/diffuse-unspecified-r8.jar
 
       - uses: peter-evans/find-comment@v2
+        if: github.event_name == 'pull_request'
         id: find_comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -63,6 +72,25 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/upload-artifact@v3
+        if: github.event_name == 'pull_request'
         with:
           name: diffuse-output
           path: ${{ steps.diffuse.outputs.diff-file }}
+
+      - uses: actions/upload-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          name: diffuse-latest-binary.jar
+          path: diffuse/build/libs/diffuse-*-binary.jar
+          if-no-files-found: error
+
+      - uses: actions/cache@v3
+        name: Upload base
+        if: github.event_name != 'pull_request'
+        with:
+          path: diffuse-source-file
+          key: diffuse-${{ github.sha }}
+
+      - run: cp diffuse/build/libs/diffuse-unspecified-r8.jar diffuse-source-file
+        if: github.event_name != 'pull_request'
+        shell: bash

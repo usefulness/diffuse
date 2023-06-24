@@ -40,6 +40,7 @@ jobs:
 
       - uses: peter-evans/find-comment@v2
         id: find_comment
+        if: github.event_name == 'pull_request'
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body-includes: Dependency diff

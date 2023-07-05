@@ -9,8 +9,6 @@ import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.groups.OptionGroup
 import com.github.ajalt.clikt.parameters.groups.provideDelegate
-import com.github.ajalt.clikt.parameters.options.FlagOption
-import com.github.ajalt.clikt.parameters.options.OptionWithValues
 import com.github.ajalt.clikt.parameters.options.convert
 import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.defaultLazy
@@ -64,31 +62,27 @@ private enum class BinaryType {
   Apk, Aar, Aab, Jar, Dex
 }
 
-private fun ParameterHolder.binaryType(): FlagOption<BinaryType> {
-  return option(help = "Input file type. Default is 'apk'.")
-    .switch(
-      "--apk" to BinaryType.Apk,
-      "--aar" to BinaryType.Aar,
-      "--aab" to BinaryType.Aab,
-      "--jar" to BinaryType.Jar,
-    )
-    .default(BinaryType.Apk)
-}
+private fun ParameterHolder.binaryType() = option(help = "Input file type. Default is 'apk'.")
+  .switch(
+    "--apk" to BinaryType.Apk,
+    "--aar" to BinaryType.Aar,
+    "--aab" to BinaryType.Aab,
+    "--jar" to BinaryType.Jar,
+  )
+  .default(BinaryType.Apk)
 
 private enum class ReportType {
   Text, Html, None
 }
 
-private fun ParameterHolder.mappingFile(name: String): OptionWithValues<ApiMapping, ApiMapping, ApiMapping> {
-  return option(
-    name,
-    help = "Mapping file produced by R8 or ProGuard.",
-    metavar = "FILE",
-  )
-    .path(mustExist = true, canBeDir = false, mustBeReadable = true)
-    .convert { it.asInput().toApiMapping() }
-    .default(ApiMapping.EMPTY)
-}
+private fun ParameterHolder.mappingFile(name: String) = option(
+  name,
+  help = "Mapping file produced by R8 or ProGuard.",
+  metavar = "FILE",
+)
+  .path(mustExist = true, canBeDir = false, mustBeReadable = true)
+  .convert { it.asInput().toApiMapping() }
+  .default(ApiMapping.EMPTY)
 
 private class OutputOptions(
   outputFs: FileSystem,
@@ -204,7 +198,13 @@ private class MembersCommand(
     .flag()
 
   private val binaryType by option(help = "File type. Default is 'apk'.")
-    .switch("--apk" to BinaryType.Apk, "--aar" to BinaryType.Aar, "--aab" to BinaryType.Aab, "--jar" to BinaryType.Jar, "--dex" to BinaryType.Dex)
+    .switch(
+      "--apk" to BinaryType.Apk,
+      "--aar" to BinaryType.Aar,
+      "--aab" to BinaryType.Aab,
+      "--jar" to BinaryType.Jar,
+      "--dex" to BinaryType.Dex,
+    )
     .default(BinaryType.Apk)
 
   private val type by option(help = "Item types to display. Default is both (methods and fields).")

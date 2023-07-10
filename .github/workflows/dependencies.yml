@@ -32,7 +32,7 @@ jobs:
       - run: ./gradlew assemble -m
 
       - id: dependency-diff
-        if: github.event_name == 'pul_request'
+        if: github.event_name == 'pull_request'
         uses: usefulness/dependency-tree-diff-action@v1
         with:
           configuration: 'runtimeClasspath'

@@ -22,3 +22,9 @@
 ### APKSIG ###
 ##############
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+##############
+### Clikt ###
+##############
+-keep class com.sun.jna.** { *; }
+-keep class * implements com.sun.jna.** { *; }

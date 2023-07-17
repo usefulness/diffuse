@@ -38,6 +38,8 @@ jobs:
       - run: ./gradlew check --scan
 
       - run: ./gradlew build --scan
+      
+      - run: java -jar diffuse/build/libs/diffuse-unspecified-r8.jar
 
       - uses: actions/cache@v3
         if: github.event_name == 'pull_request'

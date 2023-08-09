@@ -1,5 +1,5 @@
 [versions]
-bundletool = "1.15.3"
+bundletool = "1.15.4"
 # Keep this values in sync with bundletool"s dependencies.
 aapt2Proto = "7.3.0-alpha07-8248216"
 protobufJava = "3.19.2"

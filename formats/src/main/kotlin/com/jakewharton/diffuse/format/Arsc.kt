@@ -12,6 +12,7 @@ class Arsc private constructor(
     val name: String,
   ) : Comparable<Entry> {
     override fun compareTo(other: Entry) = comparator.compare(this, other)
+
     override fun toString() = "$type/$name"
 
     private companion object {

@@ -177,6 +177,7 @@ class AndroidManifest private constructor(
           append("  ")
         }
       }
+
       fun appendNode(node: Node, indent: Int) {
         appendIndent(indent)
         append('<')
@@ -218,13 +219,17 @@ class AndroidManifest private constructor(
 
     private operator fun NodeList.iterator() = object : Iterator<Node> {
       private var index = 0
+
       override fun hasNext() = index < length
+
       override fun next() = item(index++)
     }
 
     private operator fun NamedNodeMap.iterator() = object : Iterator<Node> {
       private var index = 0
+
       override fun hasNext() = index < length
+
       override fun next() = item(index++)
     }
 

@@ -14,7 +14,9 @@ value class Size(val bytes: Long) : Comparable<Size> {
   override fun compareTo(other: Size) = bytes.compareTo(other.bytes)
 
   operator fun plus(other: Size) = Size(bytes + other.bytes)
+
   operator fun minus(other: Size) = Size(bytes - other.bytes)
+
   operator fun unaryMinus() = Size(-bytes)
 
   val absoluteValue get() = Size(bytes.absoluteValue)

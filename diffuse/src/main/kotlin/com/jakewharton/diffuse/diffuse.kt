@@ -59,7 +59,11 @@ fun main(vararg args: String) {
 }
 
 private enum class BinaryType {
-  Apk, Aar, Aab, Jar, Dex
+  Apk,
+  Aar,
+  Aab,
+  Jar,
+  Dex,
 }
 
 private fun ParameterHolder.binaryType() = option(help = "Input file type. Default is 'apk'.")
@@ -72,7 +76,9 @@ private fun ParameterHolder.binaryType() = option(help = "Input file type. Defau
   .default(BinaryType.Apk)
 
 private enum class ReportType {
-  Text, Html, None
+  Text,
+  Html,
+  None,
 }
 
 private fun ParameterHolder.mappingFile(name: String) = option(
@@ -89,17 +95,22 @@ private class OutputOptions(
   private val output: PrintStream,
 ) : OptionGroup(name = "Output options") {
   private val text by option(
-    help = "File to write text report. Note: Specifying this option will disable printing the text report to standard out by default. Specify '--stdout text' to restore that behavior.",
+    help = "File to write text report. " +
+      "Note: Specifying this option will disable printing the text report to standard out by default. " +
+      "Specify '--stdout text' to restore that behavior.",
     metavar = "FILE",
   )
     .path(fileSystem = outputFs)
   private val html by option(
-    help = "File to write HTML report. Note: Specifying this option will disable printing the text report to standard out by default. Specify '--stdout text' to restore that behavior.",
+    help = "File to write HTML report. " +
+      "Note: Specifying this option will disable printing the text report to standard out by default. " +
+      "Specify '--stdout text' to restore that behavior.",
     metavar = "FILE",
   )
     .path(fileSystem = outputFs)
   private val stdout by option(
-    help = "Report to print to standard out. By default, The text report will be printed to standard out ONLY when neither --text nor --html are specified.",
+    help = "Report to print to standard out. " +
+      "By default, The text report will be printed to standard out ONLY when neither --text nor --html are specified.",
   )
     .choice("text" to ReportType.Text, "html" to ReportType.Html)
     .defaultLazy {
@@ -212,7 +223,9 @@ private class MembersCommand(
     .default(Type.All)
 
   enum class Type {
-    All, Methods, Fields
+    All,
+    Methods,
+    Fields,
   }
 
   private val ownership by option(help = "Item ownerships to display. Default is both (declared and referenced).")
@@ -220,7 +233,9 @@ private class MembersCommand(
     .default(Ownership.All)
 
   enum class Ownership {
-    All, Declared, Referenced
+    All,
+    Declared,
+    Referenced,
   }
 
   override fun run() {

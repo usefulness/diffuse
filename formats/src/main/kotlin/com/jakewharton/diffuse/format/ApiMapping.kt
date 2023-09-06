@@ -4,7 +4,9 @@ import com.jakewharton.diffuse.io.Input
 
 class ApiMapping private constructor(private val typeMappings: Map<TypeDescriptor, TypeMapping>) {
   override fun equals(other: Any?) = other is ApiMapping && typeMappings == other.typeMappings
+
   override fun hashCode() = typeMappings.hashCode()
+
   override fun toString() = typeMappings.toString()
 
   fun isEmpty() = typeMappings.isEmpty()
@@ -164,5 +166,6 @@ private data class TypeMapping(
   val methods: Map<MethodSignature, String>,
 ) {
   operator fun get(field: String) = fields[field]
+
   operator fun get(method: MethodSignature) = methods[method]
 }

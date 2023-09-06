@@ -11,6 +11,7 @@ value class TypeDescriptor(val value: String) : Comparable<TypeDescriptor> {
 
   val arrayArity get() = value.indexOfFirst { it != '[' }
   val componentDescriptor get() = TypeDescriptor(value.substring(arrayArity))
+
   fun asArray(arity: Int = 1) = TypeDescriptor("[".repeat(arity) + value)
 
   override fun toString() = sourceName

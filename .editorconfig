@@ -7,7 +7,12 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.{kt,kts}]
-ij_kotlin_imports_layout=*
+ij_kotlin_imports_layout = *
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
-ktlint_standard_filename=disabled
+ktlint_standard_filename = disabled
+ktlint_standard_no-empty-first-line-in-class-body = disabled
+ktlint_standard_multiline-expression-wrapping = disabled
+ktlint_standard_string-template-indent = disabled
+ktlint_standard_function-signature = disabled
+ktlint_standard_property-naming = disabled

@@ -15,7 +15,9 @@ class Class private constructor(
   val referencedMembers: List<Member>,
 ) {
   override fun toString() = descriptor.toString()
+
   override fun hashCode() = Objects.hash(descriptor, declaredMembers, referencedMembers)
+
   override fun equals(other: Any?) = other is Class &&
     descriptor == other.descriptor &&
     declaredMembers == other.declaredMembers &&
@@ -163,6 +165,8 @@ private val lambdaMetaFactory = Handle(
   Opcodes.H_INVOKESTATIC,
   "java/lang/invoke/LambdaMetafactory",
   "metafactory",
-  "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
+  "(Ljava/lang/invoke/MethodHandles\$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;" +
+    "Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;" +
+    "Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;",
   false,
 )

@@ -31,3 +31,6 @@
 -keepattributes RuntimeVisibleAnnotations,RuntimeVisibleParameterAnnotations,RuntimeVisibleTypeAnnotations,AnnotationDefault
 -dontwarn org.graalvm.**
 -dontwarn com.oracle.svm.core.annotate.Delete
+
+### https://issuetracker.google.com/issues/315186101#comment2
+-keep,allowobfuscation,allowshrinking class org.intellij.markdown.parser.markerblocks.MarkerBlock$ClosingAction

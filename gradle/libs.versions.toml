@@ -16,7 +16,7 @@ asm = "9.6"
 javaDiffUtils = "4.12"
 picnic = "0.7.0"
 kotlin = "1.9.22"
-ktlint-gradle-plugin = "0.7.0"
+ktlint-gradle-plugin = "0.8.0"
 r8 = "8.1.72"
 assertJ = "3.24.2"
 

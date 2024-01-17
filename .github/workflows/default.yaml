@@ -41,7 +41,7 @@ jobs:
 
       - run: java -jar diffuse/build/libs/diffuse-unspecified-r8.jar
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         if: github.event_name == 'pull_request'
         name: Download base
         with:
@@ -89,7 +89,7 @@ jobs:
           path: diffuse/build/libs/diffuse-*-binary.jar
           if-no-files-found: error
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Upload base
         if: github.event_name != 'pull_request'
         with:

@@ -33,7 +33,7 @@ jobs:
 
       - id: dependency-diff
         if: github.event_name == 'pull_request'
-        uses: usefulness/dependency-tree-diff-action@v1
+        uses: usefulness/dependency-tree-diff-action@v2
         with:
           configuration: 'runtimeClasspath'
           project: 'diffuse'

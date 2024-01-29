@@ -21,7 +21,7 @@ jobs:
         id: get_version
         run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
 
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: gradle/wrapper-validation-action@v2
 
       - uses: gradle/gradle-build-action@v3
 

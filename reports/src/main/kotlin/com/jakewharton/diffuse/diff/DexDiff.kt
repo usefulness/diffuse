@@ -5,6 +5,8 @@ import com.jakewharton.diffuse.format.ApiMapping
 import com.jakewharton.diffuse.format.Dex
 import com.jakewharton.diffuse.format.Field
 import com.jakewharton.diffuse.format.Method
+import com.jakewharton.diffuse.report.Report
+import com.jakewharton.diffuse.report.text.DexDiffTextReport
 import com.jakewharton.diffuse.report.toDiffString
 import com.jakewharton.picnic.TextAlignment.BottomCenter
 import com.jakewharton.picnic.TextAlignment.BottomLeft
@@ -17,7 +19,7 @@ internal class DexDiff(
   oldMapping: ApiMapping,
   newDexesRaw: List<Dex>,
   newMapping: ApiMapping,
-) {
+) : BinaryDiff {
   val oldDexes = oldDexesRaw.map { it.withMapping(oldMapping) }
   val newDexes = newDexesRaw.map { it.withMapping(newMapping) }
   val isMultidex = oldDexes.size > 1 || newDexes.size > 1
@@ -33,6 +35,8 @@ internal class DexDiff(
   val referencedFields = componentDiff(oldDexes, newDexes) { it.referencedMembers.filterIsInstance<Field>() }
 
   val changed = strings.changed || types.changed || methods.changed || fields.changed
+
+  override fun toTextReport(): Report = DexDiffTextReport(dexDiff = this)
 }
 
 internal fun DexDiff.toSummaryTable() = diffuseTable {

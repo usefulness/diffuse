@@ -4,6 +4,7 @@ import com.jakewharton.diffuse.format.Aab
 import com.jakewharton.diffuse.format.Aar
 import com.jakewharton.diffuse.format.ApiMapping
 import com.jakewharton.diffuse.format.Apk
+import com.jakewharton.diffuse.format.Dex
 import com.jakewharton.diffuse.format.Jar
 import com.jakewharton.diffuse.report.Report
 
@@ -38,5 +39,18 @@ interface BinaryDiff : Report.Factory {
       newJar: Jar,
       newMapping: ApiMapping = ApiMapping.EMPTY,
     ): BinaryDiff = JarDiff(oldJar, oldMapping, newJar, newMapping)
+
+    @JvmStatic
+    fun ofDex(
+      oldDex: Dex,
+      oldMapping: ApiMapping = ApiMapping.EMPTY,
+      newDex: Dex,
+      newMapping: ApiMapping = ApiMapping.EMPTY,
+    ): BinaryDiff = DexDiff(
+      oldDexesRaw = listOf(oldDex.withMapping(oldMapping)),
+      oldMapping = oldMapping,
+      newDexesRaw = listOf(newDex.withMapping(newMapping)),
+      newMapping = newMapping,
+    )
   }
 }

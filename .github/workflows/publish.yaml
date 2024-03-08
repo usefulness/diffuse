@@ -34,7 +34,7 @@ jobs:
           if-no-files-found: error
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: diffuse/build/libs/diffuse-*-binary.jar
         env:

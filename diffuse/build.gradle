@@ -47,18 +47,22 @@ def fatJarProvider = tasks.register('fatJar', Jar) { task ->
   task.exclude 'META-INF/*.version'
   task.exclude '**/*.proto'
   task.exclude '**/*.dex'
-  task.exclude 'LICENSE'
-  task.exclude 'NOTICE'
+  task.exclude '**/LICENSE'
+  task.exclude '**/LICENSE.txt'
+  task.exclude '**/NOTICE'
+  task.exclude '**/AL2.0'
+  task.exclude '**/LGPL2.1'
   task.exclude 'r8-version.properties'
   task.exclude 'migrateToAndroidx/*'
   task.exclude 'api_database/*'
+  task.exclude 'META-INF/services/com.android.tools.r8.internal.WE'
 }
 
-def r8File = layout.buildDirectory.file("libs/$archivesBaseName-$version-r8.jar").get().asFile
+def r8File = layout.buildDirectory.file("libs/${base.archivesName.get()}-$version-r8.jar").get().asFile
 def rulesFile = project.file("src/main/rules.pro")
-def r8JarProvider = tasks.register('r8Jar', JavaExec) { task ->
+def r8JarProvider = tasks.register("r8Jar", JavaExec) { task ->
   task.javaLauncher.set(javaToolchains.launcherFor { spec ->
-    spec.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.majorVersion))
+    spec.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion))
   })
   def fatJar = fatJarProvider.get()
   def fatJarFile = fatJar.archiveFile
@@ -68,7 +72,7 @@ def r8JarProvider = tasks.register('r8Jar', JavaExec) { task ->
   task.outputs.file(r8File)
 
   task.classpath(configurations.r8)
-  task.mainClass.set('com.android.tools.r8.R8')
+  task.mainClass.set("com.android.tools.r8.R8")
   task.args = [
     '--release',
     '--classfile',
@@ -79,8 +83,8 @@ def r8JarProvider = tasks.register('r8Jar', JavaExec) { task ->
   ]
 }
 
-def binaryFile = layout.buildDirectory.file("libs/$archivesBaseName-$version-binary.jar").get().asFile
-def binaryJar = tasks.register('binaryDiffuseJar') { task ->
+def binaryFile = layout.buildDirectory.file("libs/${base.archivesName.get()}-$version-binary.jar").get().asFile
+def binaryJar = tasks.register("binaryDiffuseJar") { task ->
   task.dependsOn(r8JarProvider)
 
   task.inputs.file(r8File)

@@ -50,7 +50,7 @@ jobs:
 
       - id: diffuse
         if: github.event_name == 'pull_request'
-        uses: usefulness/diffuse-action@v0.10.0
+        uses: usefulness/diffuse-action@v0.10.1
         with:
           old-file-path: diffuse-source-file
           new-file-path: diffuse/build/libs/diffuse-unspecified-r8.jar

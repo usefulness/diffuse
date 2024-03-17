@@ -42,6 +42,13 @@ internal class FunctionalTest : BaseFunctionalTest() {
   )
 
   @Test
+  fun `diffuse diff on aar with native code`() = runTest(
+    mode = "aar",
+    root = "rootbeer",
+    artifactA = "rootbeer-release.aar",
+  )
+
+  @Test
   fun `diffuse diff on signed artifact`() = runTest(
     mode = "apk",
     root = "otwarty-wykop-mobilny",

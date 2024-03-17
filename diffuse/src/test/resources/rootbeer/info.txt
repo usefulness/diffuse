@@ -1,0 +1,16 @@
+rootbeer-release.aar
+
+ AAR      │ compressed │ uncompressed 
+──────────┼────────────┼──────────────
+      jar │   14.5 KiB │     15.6 KiB 
+ manifest │      849 B │        3 KiB 
+   native │   13.5 KiB │     29.3 KiB 
+    other │      411 B │        156 B 
+──────────┼────────────┼──────────────
+    total │   29.3 KiB │     48.1 KiB 
+
+ JAR     │ count 
+─────────┼───────
+ classes │     5 
+ methods │   115 
+  fields │    18 

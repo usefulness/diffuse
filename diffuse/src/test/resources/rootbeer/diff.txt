@@ -1,0 +1,17 @@
+OLD: rootbeer-release.aar
+NEW: rootbeer-release.aar
+
+ AAR      │ old      │ new      │ diff 
+──────────┼──────────┼──────────┼──────
+      jar │ 15.6 KiB │ 15.6 KiB │  0 B 
+ manifest │    3 KiB │    3 KiB │  0 B 
+   native │ 29.3 KiB │ 29.3 KiB │  0 B 
+    other │    156 B │    156 B │  0 B 
+──────────┼──────────┼──────────┼──────
+    total │ 48.1 KiB │ 48.1 KiB │  0 B 
+
+ JAR     │ old │ new │ diff      
+─────────┼─────┼─────┼───────────
+ classes │   5 │   5 │ 0 (+0 -0) 
+ methods │ 115 │ 115 │ 0 (+0 -0) 
+  fields │  18 │  18 │ 0 (+0 -0) 

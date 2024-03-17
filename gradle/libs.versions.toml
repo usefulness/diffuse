@@ -30,6 +30,7 @@ protobufJava = { module = "com.google.protobuf:protobuf-java", version.ref = "pr
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 assertJ = { module = "org.assertj:assertj-core", version.ref = "assertJ" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 byteunits = { module = "com.jakewharton.byteunits:byteunits", version.ref = "byteunits" }

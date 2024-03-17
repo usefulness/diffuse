@@ -1,14 +1,16 @@
 OLD: rootbeer-release.aar
 NEW: rootbeer-release.aar
 
- AAR      │ old      │ new      │ diff 
-──────────┼──────────┼──────────┼──────
-      jar │ 15.6 KiB │ 15.6 KiB │  0 B 
- manifest │    3 KiB │    3 KiB │  0 B 
-   native │ 29.3 KiB │ 29.3 KiB │  0 B 
-    other │    156 B │    156 B │  0 B 
-──────────┼──────────┼──────────┼──────
-    total │ 48.1 KiB │ 48.1 KiB │  0 B 
+          │         compressed         │        uncompressed        
+          ├──────────┬──────────┬──────┼──────────┬──────────┬──────
+ AAR      │ old      │ new      │ diff │ old      │ new      │ diff 
+──────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────
+      jar │ 14.5 KiB │ 14.5 KiB │  0 B │ 15.6 KiB │ 15.6 KiB │  0 B 
+ manifest │    849 B │    849 B │  0 B │    3 KiB │    3 KiB │  0 B 
+   native │ 13.5 KiB │ 13.5 KiB │  0 B │ 29.3 KiB │ 29.3 KiB │  0 B 
+    other │    411 B │    411 B │  0 B │    156 B │    156 B │  0 B 
+──────────┼──────────┼──────────┼──────┼──────────┼──────────┼──────
+    total │ 29.3 KiB │ 29.3 KiB │  0 B │ 48.1 KiB │ 48.1 KiB │  0 B 
 
  JAR     │ old │ new │ diff      
 ─────────┼─────┼─────┼───────────

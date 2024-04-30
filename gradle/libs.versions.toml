@@ -7,7 +7,7 @@ guava = "31.0.1-jre"
 
 dalvikdx = "14.0.0_r21"
 apkparser = "31.4.0"
-apksign = "8.3.2"
+apksign = "8.4.0"
 clikt = "4.4.0"
 junit = "5.10.2"
 okio = "3.9.0"

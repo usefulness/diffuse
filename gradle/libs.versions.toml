@@ -18,7 +18,7 @@ picnic = "0.7.0"
 kotlin = "2.0.0"
 ktlint-gradle-plugin = "0.9.0"
 r8 = "8.2.47"
-assertJ = "3.25.3"
+assertJ = "3.26.0"
 
 [libraries]
 dalvikDx = { module = "com.jakewharton.android.repackaged:dalvik-dx", version.ref = "dalvikdx" }

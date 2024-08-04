@@ -21,9 +21,9 @@ jobs:
         id: get_version
         run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
 
-      - uses: gradle/actions/wrapper-validation@v3
+      - uses: gradle/actions/wrapper-validation@v4
 
-      - uses: gradle/actions/setup-gradle@v3
+      - uses: gradle/actions/setup-gradle@v4
 
       - run: ./gradlew build -Pversion=${{ steps.get_version.outputs.version }}
 

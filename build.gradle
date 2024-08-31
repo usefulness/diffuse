@@ -17,7 +17,7 @@ subprojects {
     }
     tasks.withType(KotlinCompile).configureEach {
       compilerOptions {
-        jvmTarget = JvmTarget.@Companion.fromTarget(javaTarget.majorVersion)
+        jvmTarget = JvmTarget.fromTarget(javaTarget.majorVersion)
         freeCompilerArgs = [
           "-progressive",
           '-opt-in=kotlin.contracts.ExperimentalContracts',

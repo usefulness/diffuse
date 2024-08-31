@@ -1,4 +1,6 @@
 [versions]
+java-compilation = "21"
+java-target = "11"
 bundletool = "1.17.1"
 # Keep this values in sync with bundletool"s dependencies.
 aapt2Proto = "7.3.0-alpha07-8248216"
@@ -40,7 +42,8 @@ diffUtils = { module = "io.github.java-diff-utils:java-diff-utils", version.ref 
 picnic = { module = "com.jakewharton.picnic:picnic", version.ref = "picnic" }
 r8 = { module = "com.android.tools:r8", version.ref = "r8" }
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
+ktlint-gradle = { module = "io.github.usefulness:ktlint-gradle-plugin", version.ref = "ktlint-gradle-plugin" }
 
 [plugins]
-usefulness-ktlint-gradle = { id = "io.github.usefulness.ktlint-gradle-plugin", version.ref = "ktlint-gradle-plugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-sam-with-receiver = { id = "org.jetbrains.kotlin.plugin.sam.with.receiver", version.ref = "kotlin" }

@@ -43,9 +43,7 @@ private fun Method.withoutSyntheticSuffix(): Method {
 
 private val lambdaClassSuffix = ".*?\\$\\\$Lambda\\$\\d+;".toRegex()
 
-private fun TypeDescriptor.withoutSyntheticSuffix(): TypeDescriptor {
-  return when (value.matches(lambdaClassSuffix)) {
-    true -> TypeDescriptor(value.substringBeforeLast('$') + ";")
-    false -> this
-  }
+private fun TypeDescriptor.withoutSyntheticSuffix(): TypeDescriptor = when (value.matches(lambdaClassSuffix)) {
+  true -> TypeDescriptor(value.substringBeforeLast('$') + ";")
+  false -> this
 }

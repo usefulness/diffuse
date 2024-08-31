@@ -8,6 +8,7 @@ plugins {
 
 subprojects {
   def javaTarget = JavaVersion.VERSION_11
+
   pluginManager.withPlugin(libs.plugins.kotlin.jvm.get().pluginId) {
     pluginManager.apply(libs.plugins.usefulness.ktlint.gradle.get().pluginId)
 
@@ -24,6 +25,7 @@ subprojects {
       }
     }
   }
+
   pluginManager.withPlugin("java") {
     tasks.withType(JavaCompile).configureEach {
       options.release.set(javaTarget.majorVersion.toInteger())
@@ -32,6 +34,13 @@ subprojects {
       from(rootProject.file("LICENSE"))
     }
   }
+
+  pluginManager.withPlugin("io.github.usefulness.ktlint-gradle-plugin") {
+    ktlint {
+      ktlintVersion = libs.versions.ktlint.asProvider().get()
+    }
+  }
+
   tasks.withType(Test).configureEach {
     useJUnitPlatform()
   }

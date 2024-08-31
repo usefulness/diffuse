@@ -19,12 +19,10 @@ class ApiMapping private constructor(private val typeMappings: Map<TypeDescripto
    * Given a [TypeDescriptor] which is typically obfuscated, return a new [TypeDescriptor] for the
    * original name or return [type] if not included in the mapping.
    */
-  operator fun get(type: TypeDescriptor): TypeDescriptor {
-    return typeMappings[type.componentDescriptor]
-      ?.typeDescriptor
-      ?.asArray(type.arrayArity)
-      ?: type
-  }
+  operator fun get(type: TypeDescriptor): TypeDescriptor = typeMappings[type.componentDescriptor]
+    ?.typeDescriptor
+    ?.asArray(type.arrayArity)
+    ?: type
 
   /**
    * Given a [Member] which is typically obfuscated, return a new [Member] with the types and

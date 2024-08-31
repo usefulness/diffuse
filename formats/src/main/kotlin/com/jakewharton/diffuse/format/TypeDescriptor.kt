@@ -2,9 +2,7 @@ package com.jakewharton.diffuse.format
 
 @JvmInline
 value class TypeDescriptor(val value: String) : Comparable<TypeDescriptor> {
-  override fun compareTo(other: TypeDescriptor): Int {
-    return sourceName.compareTo(other.sourceName)
-  }
+  override fun compareTo(other: TypeDescriptor): Int = sourceName.compareTo(other.sourceName)
 
   val sourceName get() = value.toHumanName()
   val simpleName get() = sourceName.substringAfterLast('.')

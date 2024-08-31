@@ -7,7 +7,5 @@ import com.jakewharton.diffuse.report.text.DexInfoTextReport
 class DexInfo(
   private val dex: Dex,
 ) : BinaryInfo {
-  override fun toTextReport(): Report {
-    return DexInfoTextReport(dex)
-  }
+  override fun toTextReport(): Report = DexInfoTextReport(dex)
 }

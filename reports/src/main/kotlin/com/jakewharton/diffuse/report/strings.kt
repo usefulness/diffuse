@@ -2,12 +2,10 @@ package com.jakewharton.diffuse.report
 
 import com.jakewharton.diffuse.io.Size
 
-internal fun Int.toUnitString(unit: String, vararg specializations: Pair<Int, String>): String {
-  return buildString {
-    append(this@toUnitString)
-    append(' ')
-    append(specializations.toMap()[this@toUnitString] ?: unit)
-  }
+internal fun Int.toUnitString(unit: String, vararg specializations: Pair<Int, String>): String = buildString {
+  append(this@toUnitString)
+  append(' ')
+  append(specializations.toMap()[this@toUnitString] ?: unit)
 }
 
 internal fun Int.toDiffString(zeroSign: Char? = null) = buildString {

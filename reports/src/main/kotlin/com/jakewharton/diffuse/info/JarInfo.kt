@@ -7,7 +7,5 @@ import com.jakewharton.diffuse.report.text.JarInfoTextReport
 class JarInfo(
   private val jar: Jar,
 ) : BinaryInfo {
-  override fun toTextReport(): Report {
-    return JarInfoTextReport(jar)
-  }
+  override fun toTextReport(): Report = JarInfoTextReport(jar)
 }

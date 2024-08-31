@@ -171,14 +171,12 @@ private class DiffCommand(
     private val oldMapping by mappingFile("--old-mapping")
     private val newMapping by mappingFile("--new-mapping")
 
-    fun parse(old: Input, new: Input): BinaryDiff {
-      return when (type) {
-        BinaryType.Apk -> BinaryDiff.ofApk(old.toApk(), oldMapping, new.toApk(), newMapping)
-        BinaryType.Aab -> BinaryDiff.ofAab(old.toAab(), new.toAab())
-        BinaryType.Aar -> BinaryDiff.ofAar(old.toAar(), oldMapping, new.toAar(), newMapping)
-        BinaryType.Jar -> BinaryDiff.ofJar(old.toJar(), oldMapping, new.toJar(), newMapping)
-        BinaryType.Dex -> BinaryDiff.ofDex(old.toDex(), oldMapping, new.toDex(), newMapping)
-      }
+    fun parse(old: Input, new: Input): BinaryDiff = when (type) {
+      BinaryType.Apk -> BinaryDiff.ofApk(old.toApk(), oldMapping, new.toApk(), newMapping)
+      BinaryType.Aab -> BinaryDiff.ofAab(old.toAab(), new.toAab())
+      BinaryType.Aar -> BinaryDiff.ofAar(old.toAar(), oldMapping, new.toAar(), newMapping)
+      BinaryType.Jar -> BinaryDiff.ofJar(old.toJar(), oldMapping, new.toJar(), newMapping)
+      BinaryType.Dex -> BinaryDiff.ofDex(old.toDex(), oldMapping, new.toDex(), newMapping)
     }
   }
 

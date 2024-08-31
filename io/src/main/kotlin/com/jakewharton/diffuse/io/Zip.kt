@@ -111,7 +111,8 @@ internal fun Path.toZip(): Zip {
 internal class PathZip(
   fs: FileSystem,
   override val entries: List<Zip.Entry>,
-) : Zip, Closeable by fs {
+) : Zip,
+  Closeable by fs {
   class Entry(
     private val root: Path,
     override val path: String,

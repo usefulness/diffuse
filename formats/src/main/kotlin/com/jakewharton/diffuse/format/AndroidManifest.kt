@@ -45,9 +45,7 @@ class AndroidManifest private constructor(
         isNamespaceAware = true
       }
 
-    internal fun BinaryResourceFile.toManifest(arsc: Arsc? = null): AndroidManifest {
-      return toDocument(arsc).toManifest()
-    }
+    internal fun BinaryResourceFile.toManifest(arsc: Arsc? = null): AndroidManifest = toDocument(arsc).toManifest()
 
     @JvmStatic
     @JvmName("parse")
@@ -57,11 +55,9 @@ class AndroidManifest private constructor(
     @JvmName("parse")
     fun Input.toManifest(): AndroidManifest = toUtf8().toManifest()
 
-    internal fun XmlNode.toManifest(): AndroidManifest {
-      return XmlProtoToXmlConverter.convert(XmlProtoNode(this))
-        .apply { normalizeWhitespace() }
-        .toManifest()
-    }
+    internal fun XmlNode.toManifest(): AndroidManifest = XmlProtoToXmlConverter.convert(XmlProtoNode(this))
+      .apply { normalizeWhitespace() }
+      .toManifest()
 
     private fun BinaryResourceFile.toDocument(arsc: Arsc?): Document {
       val rootChunk = requireNotNull(chunks.singleOrNull() as XmlChunk?) {
@@ -134,11 +130,9 @@ class AndroidManifest private constructor(
       return document
     }
 
-    private fun String.toDocument(): Document {
-      return documentBuilderFactory.newDocumentBuilder()
-        .parse(InputSource(StringReader(this)))
-        .apply { normalizeWhitespace() }
-    }
+    private fun String.toDocument(): Document = documentBuilderFactory.newDocumentBuilder()
+      .parse(InputSource(StringReader(this)))
+      .apply { normalizeWhitespace() }
 
     private fun Document.normalizeWhitespace() {
       normalize()
@@ -233,12 +227,10 @@ class AndroidManifest private constructor(
       override fun next() = item(index++)
     }
 
-    private fun Element.getAttributeOrNull(namespace: String?, name: String): String? {
-      return if (hasAttributeNS(namespace, name)) {
-        getAttributeNS(namespace, name)
-      } else {
-        null
-      }
+    private fun Element.getAttributeOrNull(namespace: String?, name: String): String? = if (hasAttributeNS(namespace, name)) {
+      getAttributeNS(namespace, name)
+    } else {
+      null
     }
 
     private const val ANDROID_NS = "http://schemas.android.com/apk/res/android"

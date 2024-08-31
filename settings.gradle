@@ -27,3 +27,5 @@ include ':diffuse'
 include ':formats'
 include ':io'
 include ':reports'
+
+includeBuild("gradle/plugins")

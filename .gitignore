@@ -3,5 +3,7 @@
 *.iml
 
 # Gradle
-/.gradle
+.gradle
 build
+
+.kotlin

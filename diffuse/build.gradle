@@ -1,9 +1,9 @@
 plugins {
-  alias(libs.plugins.kotlin.jvm)
+  id("setup-compilation")
 }
 
 configurations {
-  r8
+  register("r8")
 }
 
 dependencies {

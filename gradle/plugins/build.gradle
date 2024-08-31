@@ -1,0 +1,31 @@
+import org.gradle.kotlin.dsl.ProjectExtensionsKt
+
+plugins {
+  id 'java-gradle-plugin'
+  alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlin.sam.with.receiver)
+}
+
+samWithReceiver {
+  annotation("org.gradle.api.HasImplicitReceiver")
+}
+
+kotlin {
+  jvmToolchain(libs.versions.java.compilation.get().toInteger())
+}
+
+dependencies {
+  implementation(ProjectExtensionsKt.gradleKotlinDsl(project))
+  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin")
+  implementation(libs.ktlint.gradle)
+  implementation(gradleApi())
+}
+
+gradlePlugin {
+  plugins {
+    publishingPlugin {
+      id = 'setup-compilation'
+      implementationClass = 'SetupCompilationPlugin'
+    }
+  }
+}

@@ -3,8 +3,10 @@
 package com.jakewharton.diffuse
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.core.NoOpCliktCommand
 import com.github.ajalt.clikt.core.ParameterHolder
+import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.groups.OptionGroup
@@ -142,11 +144,13 @@ private class InfoCommand(
   inputFs: FileSystem,
   outputFs: FileSystem,
   output: PrintStream,
-) : CliktCommand(name = "info", help = "Display info about a binary.") {
+) : CliktCommand(name = "info") {
   private val type by binaryType()
   private val outputOptions by OutputOptions(outputFs, output)
   private val file by argument("FILE", help = "Input file.")
     .path(mustExist = true, canBeDir = false, mustBeReadable = true, fileSystem = inputFs)
+
+  override fun help(context: Context) = "Display info about a binary."
 
   override fun run() {
     val info = when (type) {
@@ -164,7 +168,7 @@ private class DiffCommand(
   inputFs: FileSystem,
   outputFs: FileSystem,
   output: PrintStream,
-) : CliktCommand(name = "diff", help = "Display changes between two binaries.") {
+) : CliktCommand(name = "diff") {
   private val inputOptions by object : OptionGroup("Input options") {
     private val type by binaryType()
 
@@ -188,6 +192,8 @@ private class DiffCommand(
   private val new by argument("NEW", help = "New input file.")
     .path(mustExist = true, canBeDir = false, mustBeReadable = true, fileSystem = inputFs)
 
+  override fun help(context: Context) = "Display changes between two binaries."
+
   override fun run() {
     val diff = inputOptions.parse(old.asInput(), new.asInput())
     outputOptions.write(diff)
@@ -197,7 +203,7 @@ private class DiffCommand(
 private class MembersCommand(
   inputFs: FileSystem,
   private val stdout: PrintStream,
-) : CliktCommand(name = "members", help = "List methods or fields of a binary.") {
+) : CliktCommand(name = "members") {
   private val binary by argument("FILE", help = "Input file.")
     .path(mustExist = true, canBeDir = false, mustBeReadable = true, fileSystem = inputFs)
 
@@ -236,6 +242,8 @@ private class MembersCommand(
     Declared,
     Referenced,
   }
+
+  override fun help(context: Context) = "List methods or fields of a binary."
 
   override fun run() {
     val input = binary.asInput()

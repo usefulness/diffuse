@@ -42,8 +42,7 @@ interface Zip : Closeable {
 
   fun find(path: String) = entries.firstOrNull { it.path == path }
 
-  operator fun get(path: String) =
-    find(path) ?: throw FileNotFoundException("No entry: $path")
+  operator fun get(path: String) = find(path) ?: throw FileNotFoundException("No entry: $path")
 
   interface Entry {
     val path: String

@@ -1,17 +1,25 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "includeForks": true,
+  "forkProcessing": "enabled",
   "assignees": [
     "mateuszkwiecinski"
   ],
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true
     }
   ],
-  "ignoreDeps": ["com.google.protobuf:protobuf-java", "com.android.tools.build:aapt2-proto"]
+  "ignoreDeps": [
+    "com.google.protobuf:protobuf-java",
+    "com.android.tools.build:aapt2-proto"
+  ]
 }

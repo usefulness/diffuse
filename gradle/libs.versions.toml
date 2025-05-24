@@ -19,7 +19,7 @@ javaDiffUtils = "4.15"
 picnic = "0.7.0"
 kotlin = "2.1.21"
 ktlint-gradle-plugin = "0.10.0"
-r8 = "8.7.18"
+r8 = "8.9.35"
 assertJ = "3.27.3"
 ktlint = "1.6.0"
 

@@ -20,7 +20,7 @@ class SetupCompilationPlugin : Plugin<Project> {
     val javaTarget = getVersionCatalogVersion("java-target").toInt()
 
     kotlinExtension.apply {
-      jvmToolchain(24)
+      jvmToolchain(25)
     }
 
     tasks.withType<KotlinJvmCompile>().configureEach {

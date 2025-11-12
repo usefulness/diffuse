@@ -7,7 +7,7 @@ aapt2Proto = "7.3.0-alpha07-8248216"
 protobufJava = "3.19.2"
 guava = "31.0.1-jre"
 
-dalvikdx = "14.0.0_r21"
+dalvikdx = "16.0.1"
 apkparser = "31.13.1"
 apksign = "8.13.1"
 clikt = "5.0.3"

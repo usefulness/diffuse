@@ -21,7 +21,7 @@ kotlin = "2.2.21"
 ktlint-gradle-plugin = "0.11.0"
 r8 = "8.13.17"
 assertJ = "3.27.6"
-ktlint = "1.7.1"
+ktlint = "1.8.0"
 
 [libraries]
 dalvikDx = { module = "com.jakewharton.android.repackaged:dalvik-dx", version.ref = "dalvikdx" }

@@ -20,7 +20,7 @@ picnic = "0.7.0"
 kotlin = "2.3.0"
 ktlint-gradle-plugin = "0.12.0"
 r8 = "8.13.19"
-assertJ = "3.27.6"
+assertJ = "3.27.7"
 ktlint = "1.8.0"
 
 [libraries]

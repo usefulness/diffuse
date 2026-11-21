@@ -26,7 +26,7 @@ class Arsc private constructor(
     @JvmStatic
     @JvmName("create")
     fun Input.toArsc(): Arsc {
-      val chunk = toBinaryResourceFile().chunks.single()
+      val chunk = toResourceFile().chunks.single()
       check(chunk is ResourceTableChunk) { "Root arsc chunk is not a resource table " }
 
       val configs = mutableListOf<String>()
@@ -43,7 +43,7 @@ class Arsc private constructor(
 
           val typeId = typeChunk.id
           for ((entryId, entry) in typeChunk.entries) {
-            // See BinaryResourceIdentifier for the source of this algorithm.
+            // See ResourceIdentifier for the source of this algorithm.
             val id = ((packageId and 0xFF) shl 24) or
               ((typeId and 0xFF) shl 16) or
               ((entryId and 0xFFFF))

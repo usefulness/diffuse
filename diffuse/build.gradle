@@ -102,7 +102,7 @@ def binaryJar = tasks.register("binaryDiffuseJar") { task ->
   }
 }
 
-[17].forEach { majorVersion ->
+[17, 21, 25].forEach { majorVersion ->
   def jdkTest = tasks.register("testJdk$majorVersion", Test) {
     javaLauncher = javaToolchains.launcherFor {
       languageVersion = JavaLanguageVersion.of(majorVersion)

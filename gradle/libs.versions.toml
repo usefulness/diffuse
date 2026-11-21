@@ -1,5 +1,5 @@
 [versions]
-java-compilation = "21"
+java-compilation = "25"
 java-target = "11"
 bundletool = "1.18.3"
 # Keep this values in sync with bundletool"s dependencies.

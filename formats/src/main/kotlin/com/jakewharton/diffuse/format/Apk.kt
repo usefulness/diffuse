@@ -26,7 +26,7 @@ class Apk private constructor(
       toZip().use { zip ->
         val files = zip.toArchiveFiles { it.toApkFileType() }
         val arsc = zip[Arsc.NAME].asInput().toArsc()
-        val manifest = zip[AndroidManifest.NAME].asInput().toBinaryResourceFile().toManifest(arsc)
+        val manifest = zip[AndroidManifest.NAME].asInput().toResourceFile().toManifest(arsc)
         val dexes = zip.entries
           .filter { it.path.matches(classesDexRegex) }
           .map { it.asInput().toDex() }
